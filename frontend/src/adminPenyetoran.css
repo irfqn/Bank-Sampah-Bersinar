@@ -1,0 +1,14 @@
+.penyetoran-main-page{
+    overflow: hidden;
+    height: 100vh;
+}
+
+.penyetoran-container{
+    height: 100%;
+    padding: 1.5rem;
+}
+
+.penyetoran-card{
+    height: 100%;
+    overflow: scroll;
+}

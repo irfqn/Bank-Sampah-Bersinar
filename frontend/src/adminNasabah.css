@@ -1,0 +1,19 @@
+.nasabah-card{
+    height: 90%;
+    overflow: scroll;
+}
+
+.nasabah-container{
+    height: 100%;
+    width: auto;
+    padding-block: 1rem;
+    /* padding: 1rem; */
+}
+
+.nasabah-main-page{
+    overflow: hidden;
+}
+
+Input{
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,38 @@
+.logo {
+  position: absolute;
+  right: 5%;
+  width: 6.5rem;
+  padding-top: 1rem;
+}
+
+.container{
+  overflow: hidden;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin-block: 8rem;
+  background-color: white;
+}
+
+.cardTitle {
+  color: #e47222;
+}
+
+.button {
+  background-color: #206a4a;
+  color: white;
+}
+
+.wvBackground {
+  z-index: -999;
+}
+
+.registerButton{
+  cursor: pointer;
+}

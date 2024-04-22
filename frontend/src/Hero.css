@@ -1,0 +1,51 @@
+.container{
+  overflow: hidden;
+}
+
+.button1{
+  background-color: #2C7865;
+  color: white;
+}
+
+.button1:hover {
+  background-color: darkorange; 
+}
+
+.mainContainer{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.heroTitle{
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.3px;
+  line-height: 68px;
+  font-weight: 600;
+  font-size: 72px;
+  color: #2C7865;
+  text-align: center;
+  width: 65%;
+  margin-block-start: 10rem;
+}
+
+.mainContainer p{
+  width: 60%;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  margin-block-start: 1rem;
+  color: #D9EDBF;
+}
+
+.button2{
+  background-color: #FF9800;
+  color: white;
+  margin-block-start: 1rem;
+}
+
+.button2:hover{
+  background-color: #2C7865;
+}

@@ -1,0 +1,9 @@
+.isi-nama{
+    display: flex;
+    column-gap: 1rem;
+}
+
+.lahir{
+    display: flex;
+    column-gap: 1rem;
+}

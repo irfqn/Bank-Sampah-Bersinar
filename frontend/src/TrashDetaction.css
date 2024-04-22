@@ -1,0 +1,44 @@
+.td-content{
+    padding-inline: 6rem;
+    padding-block: 2rem;
+    width: 100%;
+    height: 90.2vh;
+}
+
+.title{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.description{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.scan-card{
+    display: flex;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.td-kiri{
+    width: 70%;
+    background-color: red;
+    flex-grow: 3;
+}
+
+.td-kanan{
+    width: 30%;
+    background-color: white;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.input{
+    background-color: white;
+}

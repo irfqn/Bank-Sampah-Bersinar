@@ -1,0 +1,16 @@
+.main-page{
+    overflow: hidden;
+}
+
+.admin-container{
+    height: 100%;
+    width: auto;
+    padding-block: 1rem;
+    display: flex;
+}
+
+.dashboard-card{
+    height: 90%;
+    width: 92%;
+    overflow: scroll;
+}
