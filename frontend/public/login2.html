@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login2</title>
+    <link rel="stylesheet" href="login2.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <img src="img/bank-bersinar-logo.png" class="logo" />
+      <main>
+        <h1 class="title">Log in to Your Account</h1>
+        <p class="welcome">Welcome back! select method to login</p>
+        <button class="google">
+          <img src="img/google_logo.png" alt="gLogo" />
+          <h1>Google</h1>
+        </button>
+        <p class="cEmail">or continue with email</p>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button class="next"><h1>Next!</h1></button>
+        <p class="regNow">
+          Don’t have an account? <a href="register.html">Register Now</a>
+        </p>
+      </main>
+    </div>
+
+    <!-- script -->
+    <script>
+      document
+        .querySelector(".next")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent form submission
+          // Redirect to another page
+          window.location.href = "sidebar-dashboard-1/index.html";
+        });
+    </script>
+  </body>
+</html>

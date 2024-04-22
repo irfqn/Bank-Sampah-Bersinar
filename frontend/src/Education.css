@@ -1,0 +1,30 @@
+.edu-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 3rem;
+  }
+  
+  .edu-card {
+    flex-basis: calc(33.3333% - 20px); /* Adjust the width of each card as needed */
+    margin-bottom: 20px; /* Add margin bottom to create spacing between cards */
+    padding: 1rem;
+  }
+
+.edu-content-card{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    padding: 1.5rem;
+}
+  
+  .edu-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px; /* Add margin bottom to the image */
+    border-radius: 1rem;
+  }
+  
+.button{
+    background-color: #206a4a;
+}

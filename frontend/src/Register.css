@@ -1,0 +1,28 @@
+.card{
+    background-color: white;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.cardContent{
+    padding: 0.5rem;
+}
+
+.button{
+    background-color: #e47222;
+}
+
+.button:hover{
+    background-color: #206a4a;
+}
+
+.cardTitle{
+    color: #206a4a;
+}
+
+.loginButton{
+    cursor: pointer;
+}

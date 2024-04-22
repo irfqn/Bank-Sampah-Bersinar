@@ -1,0 +1,89 @@
+.form-content{
+    padding-inline: 6rem;
+    padding-block: 2rem;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.form-title{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.form-description{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
+
+.form-card{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.card-title{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.card-description{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    margin-top: -0.3rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.form-data{
+    display: flex;
+    column-gap: 3rem;
+}
+
+.each-data p{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    margin-top: -0.3rem;
+    font-size: 1rem;
+    /* opacity: 0.8; */
+}
+
+.each-data h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.bank p{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    margin-top: -0.3rem;
+    font-size: 1rem;
+}
+
+.form-card-content{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.rekening p{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.rekening Input{
+    width: 20rem;
+}
+
+.form-button{
+    background-color: #206a4a;
+    color: white;
+    width: 7rem;
+}
