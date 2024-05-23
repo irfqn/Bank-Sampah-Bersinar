@@ -1,0 +1,32 @@
+description: Ultralytics YOLOv8 model trained on data.yaml
+author: Ultralytics
+date: '2024-05-07T06:57:38.021068'
+version: 8.2.10
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: B8-B9
+  1: BW-Bening-Warna
+  2: K1-K3-K4-K5-K6-K7-Tabloid
+  3: K2
+  4: K9
+  5: Kemasan Obat
+  6: Mika
+  7: P12-Mix. BM- Bening-P14
+  8: P17-P34-P37-Kemasan
+  9: P20
+  10: P21
+  11: P22-P23
+  12: P31-Galon Le-mineral
+  13: P32
+  14: P38-P39
+  15: P5
+  16: P7 - Tutup Botol-P29
+  17: P7-P8
+  18: S1-A3

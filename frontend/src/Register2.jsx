@@ -105,6 +105,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { WavyBackground } from "./components/ui/wavy-background";
 import "./Register2.css";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   return <img src={bankBersinarLogo} className="logo" alt="Bank Bersinar Logo" />;
@@ -130,7 +131,7 @@ const Register2 = () => {
   const handleRegister = async () => {
     try {
         console.log("Form Data:", formData);
-      const response = await fetch("http://localhost:3000/api/user/signup", {
+        const response = await fetch("http://localhost:3000/api/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -158,6 +159,8 @@ const Register2 = () => {
 };
 
 const Content = ({ formData, handleChange, handleRegister }) => {
+  const navigate=useNavigate()
+
   return (
     <Card className="w-[400px] card">
       <CardHeader>
@@ -205,6 +208,7 @@ const Content = ({ formData, handleChange, handleRegister }) => {
             <Label>Password</Label>
             <Input type="password" id="password" value={formData.password} onChange={handleChange} />
           </div>
+          <CardDescription>Already have an account? <span className="font-bold registerButton" onClick={()=>navigate("/login")}>Log In Now!</span></CardDescription>
       </CardContent>
       <CardFooter>
         <Button className="button" onClick={handleRegister}>Regist</Button>

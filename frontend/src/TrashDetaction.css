@@ -1,8 +1,13 @@
-.td-content{
+.td-container{
     padding-inline: 6rem;
     padding-block: 2rem;
     width: 100%;
-    height: 90.2vh;
+    /* height: 90.2vh; */
+}
+
+.buttonH{
+    padding-inline: 6rem;
+    padding-block: 2rem;
 }
 
 .title{
@@ -42,3 +47,54 @@
 .input{
     background-color: white;
 }
+
+.td-content > img {
+    display: none;
+    width: 100%;
+    max-width: 720px;
+    max-height: 500px;
+    border-radius: 10px;
+  }
+  
+  .td-content > video {
+    display: none;
+    width: 100%;
+    max-width: 720px;
+    max-height: 500px;
+    border-radius: 10px;
+  }
+  
+  .td-content {
+    position: relative;
+  }
+  
+  .td-content > canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .buttontd {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .buttontd:hover {
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+  }
+
+  .buttonSubmit{
+    background-color: black;
+    color: white;
+  }
+  

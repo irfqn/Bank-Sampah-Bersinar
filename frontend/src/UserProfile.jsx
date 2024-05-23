@@ -74,6 +74,7 @@ const UserProfile = () => {
     const fetchUserProfile = async () => {
       try {
         const token = getCookie("token"); // Mengambil token dari cookie
+        console.log(token)
         const response = await fetch("http://localhost:3000/api/user/profile", {
           method: "GET",
           headers: {
@@ -97,13 +98,13 @@ const UserProfile = () => {
   }, []);
 
   // Fungsi untuk mengambil nilai cookie berdasarkan namanya
-    const getCookie = (name) => {
+  const getCookie = (name) => {
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
     return cookieValue ? cookieValue.pop() : '';
   };
 
     // Fungsi untuk menghitung umur dari tanggal lahir
-    const calculateAge = (birthdate) => {
+  const calculateAge = (birthdate) => {
     const today = new Date();
     const birthDate = new Date(birthdate);
     let age = today.getFullYear() - birthDate.getFullYear();

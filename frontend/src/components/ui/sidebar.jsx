@@ -5,18 +5,22 @@ import { LuBuilding } from "react-icons/lu";
 import { LiaWineBottleSolid } from "react-icons/lia";
 import { LuBookPlus } from "react-icons/lu";
 import { FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
+  const navigate=useNavigate();
+
   const Menus = [
-    { title: "Dashboard", icon: BiChart },
-    { title: "Nasabah", icon: BiUser, gap: true },
-    { title: "Penyetoran", icon: BiUser },
-    { title: "Mitra", icon: LuBuilding },
-    { title: "Pendataan Mitra", icon: LuBuilding },
-    { title: "Trash Detection", icon: LiaWineBottleSolid },
-    { title: "Education", icon: LuBookPlus },
-    { title: "Logout ", icon: FiLogOut, gap: true },
+    { title: "Dashboard", icon: BiChart, href:"/admin/dashboard" },
+    { title: "Nasabah", icon: BiUser, href:"/admin/nasabah", gap: true },
+    { title: "Penyetoran", icon: BiUser, href:"/admin/penyetoran" },
+    { title: "Mitra", icon: LuBuilding, href:"/admin/mitra" },
+    { title: "Pendataan Mitra", icon: LuBuilding, href:"/admin/pendataan" },
+    { title: "Trash Detection", icon: LiaWineBottleSolid, href:"/admin/trash-detaction" },
+    { title: "Trash Price", icon: LiaWineBottleSolid, href:"/admin/price" },
+    { title: "Education", icon: LuBookPlus, href:"/admin/education" },
+    { title: "Logout ", icon: FiLogOut, href:"/", gap: true },
   ];
 
   return (
@@ -49,6 +53,7 @@ const Sidebar = () => {
               ${Menu.gap ? "mt-9" : "mt-2"} ${
               index === 0 && "bg-orange-600"
             } `}
+            onClick={()=>navigate(Menu.href)}
           >
             <Menu.icon />
             <span className={`${!open && "hidden"} origin-left duration-200`}>

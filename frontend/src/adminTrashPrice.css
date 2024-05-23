@@ -1,0 +1,33 @@
+.tp-main-page{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.tp-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-block: 1rem;
+}
+
+.tp-left, .tp-right{
+    flex-grow: 1;
+}
+
+.tp-left{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.input-price{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.3rem; 
+}
+
+.searchName{
+    height: 400px;
+    overflow: scroll;
+}

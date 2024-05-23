@@ -5,25 +5,26 @@ import { Button } from './button';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { deleteTokenFromCookie } from '@/utils/authUtils';
 import { useNavigate } from "react-router-dom";
+import userIcon from "../../assets/img/user.jpg"
 
 const user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: { userIcon}
+      // 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Trash Detection', href: '#', current: false },
-    { name: 'Price Prediction', href: '#', current: false },
-    { name: 'Form', href: '#', current: false },
-    { name: 'Education', href: '#', current: false },
+    { name: 'Dashboard', href: '/dashboard', current: true },
+    { name: 'Trash Detection', href: '/trash-detaction', current: false },
+    { name: 'Price Prediction', href: '/prediction', current: false },
+    { name: 'Form', href: '/form', current: false },
+    { name: 'Education', href: '/education', current: false },
   ]
 
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', href: '/profile' },
+  { name: 'Sign out', href: '/' },
 ]
 
 function classNames(...classes) {
@@ -38,7 +39,7 @@ const Navbar=()=>{
       navigate("/")
     }
     return(
-        <Disclosure as="nav" className="">
+        <Disclosure as="nav">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -56,7 +57,7 @@ const Navbar=()=>{
                         {navigation.map((item)=>(
                           <Button 
                           key={item.name}
-                          href={item.href}
+                          onClick={()=>navigate(item.href)}
                           className="nav-link">
                             {item.name}
                           </Button>
@@ -73,7 +74,7 @@ const Navbar=()=>{
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="absolute -inset-1.5" />
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                            <img className="h-8 w-8 rounded-full" src={userIcon} alt="" />
                           </Menu.Button>
                         </div>
                         <Transition

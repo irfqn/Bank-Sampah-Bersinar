@@ -20,6 +20,7 @@ import AdminPenyetoran from "./adminPenyetoran.jsx";
 import AdminPendataan from "./adminPendataan.jsx";
 import AdminTrashDetaction from "./adminTrashDetaction.jsx";
 import AdminEducation from "./adminEducation.jsx";
+import AdminTPrice from "./adminTrashPrice.jsx";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/education",
     element: <AdminEducation/>,
+  },
+  {
+    path: "/admin/price",
+    element: <AdminTPrice/>,
+  },
+  {
+    path: "/admin/dashboard",
+    element: <AdminDashboard/>,
   },
 ]);
 

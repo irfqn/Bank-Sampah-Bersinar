@@ -12,3 +12,16 @@
     height: 100%;
     overflow: scroll;
 }
+
+.submit-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 1rem;
+}
+
+.submit-button:hover {
+    background-color: darkgray;
+}
