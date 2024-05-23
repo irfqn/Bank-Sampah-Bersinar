@@ -11,7 +11,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export function SelectDemo() {
+// eslint-disable-next-line react/prop-types, no-unused-vars
+export function SelectDemo({ value, onChange }) {
+  const handleSelectChange = (event) => {
+    onChange(event.target.value);
+  };
+
   return (
     <Select className="bg-white">
       <SelectTrigger className="w-[180px] bg-white">
@@ -20,11 +25,11 @@ export function SelectDemo() {
       <SelectContent className="bg-white">
         <SelectGroup>
           <SelectLabel>Trash</SelectLabel>
-          <SelectItem value="apple">P1</SelectItem>
-          <SelectItem value="banana">P2</SelectItem>
-          <SelectItem value="blueberry">P3</SelectItem>
-          <SelectItem value="grapes">P4</SelectItem>
-          <SelectItem value="pineapple">P5</SelectItem>
+          <SelectItem value="apple" onChange={handleSelectChange}>P1</SelectItem>
+          <SelectItem value="banana" onChange={handleSelectChange}>P2</SelectItem>
+          <SelectItem value="blueberry" onChange={handleSelectChange}>P3</SelectItem>
+          <SelectItem value="grapes" onChange={handleSelectChange}>P4</SelectItem>
+          <SelectItem value="pineapple" onChange={handleSelectChange}>P5</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

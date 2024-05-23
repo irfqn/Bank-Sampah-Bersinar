@@ -1,4 +1,4 @@
-.logo{
+/* .logo{
     width: 6.5rem;
 }
 
@@ -12,14 +12,12 @@
     color: #D9EDBF;
 }
 
-.content{
-    /* background-color: red; */
-}
-
 .bell-icon{
     background-color: #FF9800;
     color: #D9EDBF;
-}
+} */
+
+/* --------------- */
 
 /* .content{
     width: 100%;
@@ -103,10 +101,11 @@
 }
  */
 
- .content {
-    /* background-color: red; */
+/* -------------------- */
+
+ /* .content {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-wrap: wrap;
     padding-inline: 2rem;
@@ -115,13 +114,11 @@
 .kiri {
     width: 100%;
     height: auto;
-    /* background-color: green; */
 }
 
 .price {
     width: 100%;
     height: 35%;
-    /* background-color: purple; */
     display: flex;
     box-sizing: border-box;
     padding: 1rem;
@@ -134,7 +131,7 @@
 }
 
 .current-price h1 {
-    font-size: 2.3rem;
+    font-size: 2rem;
     font-weight: 500;
 }
 
@@ -150,14 +147,8 @@
 
 .education {
     height: 100%;
-    /* background-color: greenyellow; */
     box-sizing: border-box;
     padding: 1rem;
-}
-
-.education-card {
-    /* height: 100%; */
-    /* background-color: white; */
 }
 
 .gambar {
@@ -184,18 +175,17 @@
 .kanan {
     width: 100%;
     height: auto;
-    /* background-color: yellow; */
     box-sizing: border-box;
     padding: 1rem;
 }
 
 .history {
-    height: 100%;
+    width: 39rem;
+    height: auto;
     overflow: scroll;
     background-color: white;
 }
 
-/* Responsiveness */
 @media (min-width: 640px) {
     .content {
         flex-wrap: nowrap;
@@ -224,7 +214,6 @@
         overflow: auto;
     }
 
-    /* Ubah urutan kiri dan kanan saat tampilan mencapai ukuran tertentu */
     .flex-row-reverse {
         flex-direction: row-reverse;
     }
@@ -239,4 +228,155 @@
         flex-direction: column;
         row-gap: 1rem;
     }
+} */
+
+
+/* ------------------------------------ */
+
+.content{
+    width: 100%;
+    height: 120vh;
+    display: flex;
+    padding: 2rem;
+    overflow: hidden;
 }
+
+.kiri{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    flex: 50%;
+    padding-inline: 1rem;
+    box-sizing: border-box;
+}
+
+.price{
+    display: flex;
+    flex-direction:  row;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.current-price{
+    background-color: white;
+    flex: 50%;
+    margin-right: 1rem;
+}
+
+.predict-price{
+    background-color: white;
+    flex: 50%;
+}
+
+.current-price h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.predict-price h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.carousel{
+    background-color: white;
+}
+
+.carousel-content{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.gambar{
+    width: 15rem;
+    height: 13rem;
+    border-radius: 1rem;
+}
+
+.article {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: calc(1.2em * 4); /* Approximate line height times the number of lines */
+    line-height: 1.2em; /* Adjust line height as needed */
+}
+  
+
+.kanan{
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    box-sizing: border-box;
+    flex: 50%;
+}
+
+.history{
+    width: 600px;
+    height: 37rem;
+    background-color: white;
+    overflow: scroll;
+}
+
+/* Tampilan untuk perangkat mobile */
+@media (max-width: 767px) {
+    /* CSS untuk layout mobile */
+    .content {
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .kiri, .kanan {
+        flex: 100%;
+        padding: 0.5rem;
+    }
+
+    .price {
+        /* flex-direction: column; */
+        /* padding: 0; */
+    }
+
+    .current-price, .predict-price {
+        flex: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .gambar {
+        width: 100%;
+    }
+
+    .history {
+        width: 100%;
+        height: auto;
+        /* max-height: 37rem; */
+    }
+}
+
+/* Tampilan untuk tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* CSS untuk layout tablet */
+    .content{
+        width: auto;
+        flex-wrap: wrap;
+    }
+
+    .history{
+        width: auto;
+        margin-block: 1rem;
+    }
+}
+
+/* Tampilan untuk desktop */
+@media (min-width: 1024px) {
+    /* CSS untuk layout desktop */
+}
+
+
+
+/* ------------------------ */
+

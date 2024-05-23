@@ -9,7 +9,7 @@ import {
     TableFooter
   } from "@/components/ui/table"
   
-  const customer = [
+const customer = [
     {
         id:1,
         Mitra: "John Doe",
@@ -67,6 +67,7 @@ import {
   ]
   
   export function MitraTable() {
+    
     return (
       <Table>
         <TableCaption>A list of Nasabah.</TableCaption>

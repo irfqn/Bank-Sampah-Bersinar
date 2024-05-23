@@ -1,100 +1,71 @@
-import Navbar from "./components/ui/Navbar"
-import { Card, CardContent, CardTitle } from "./components/ui/card"
-import { Button } from "./components/ui/button"
-import "./Education.css"
+// Education.jsx
 
-const educationDummy=[
-    {
-      title: "Lorem ipsum dolor sit amet" ,
-      description: (
-        <>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque accusantium sed, quibusdam natus doloremque officiis consequatur blanditiis, quidem rerum nostrum minima saepe beatae unde aliquam at inventore tempora ut a voluptas, est tempore veritatis dolor voluptatem dolores. Eos, nam laudantium.
-          </p>
-        </>
-      ),
-      image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      title: "Lorem ipsum dolor sit amet" ,
-      description: (
-        <>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque accusantium sed, quibusdam natus doloremque officiis consequatur blanditiis, quidem rerum nostrum minima saepe beatae unde aliquam at inventore tempora ut a voluptas, est tempore veritatis dolor voluptatem dolores. Eos, nam laudantium.
-          </p>
-        </>
-      ),
-      image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      title: "Lorem ipsum dolor sit amet" ,
-      description: (
-        <>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque accusantium sed, quibusdam natus doloremque officiis consequatur blanditiis, quidem rerum nostrum minima saepe beatae unde aliquam at inventore tempora ut a voluptas, est tempore veritatis dolor voluptatem dolores. Eos, nam laudantium.
-          </p>
-        </>
-      ),
-      image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      title: "Lorem ipsum dolor sit amet" ,
-      description: (
-        <>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque accusantium sed, quibusdam natus doloremque officiis consequatur blanditiis, quidem rerum nostrum minima saepe beatae unde aliquam at inventore tempora ut a voluptas, est tempore veritatis dolor voluptatem dolores. Eos, nam laudantium.
-          </p>
-        </>
-      ),
-      image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      title: "Lorem ipsum dolor sit amet" ,
-      description: (
-        <>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque accusantium sed, quibusdam natus doloremque officiis consequatur blanditiis, quidem rerum nostrum minima saepe beatae unde aliquam at inventore tempora ut a voluptas, est tempore veritatis dolor voluptatem dolores. Eos, nam laudantium.
-          </p>
-        </>
-      ),
-      image:"https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      title: "Lorem ipsum dolor sit amet" ,
-      description: (
-        <>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque accusantium sed, quibusdam natus doloremque officiis consequatur blanditiis, quidem rerum nostrum minima saepe beatae unde aliquam at inventore tempora ut a voluptas, est tempore veritatis dolor voluptatem dolores. Eos, nam laudantium.
-          </p>
-        </>
-      ),
-      image:"https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    }
-  ]
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useState } from "react";
+import Navbar from "./components/ui/Navbar";
+import { Card, CardContent, CardTitle } from "./components/ui/card";
+import { Button } from "./components/ui/button";
+import ArticleDetail from "./Article"; // Import ArticleDetail component
+import "./Education.css";
 
-const Education=()=>{
-    return(
+const Education = () => {
+    const [educationData, setEducationData] = useState([]);
+    const [selectedArticle, setSelectedArticle] = useState(null);
+
+    useEffect(() => {
+        const fetchEducationData = async () => {
+            try {
+                const response = await fetch("http://localhost:3000/api/user/education");
+                if (!response.ok) {
+                    throw new Error("Failed to fetch education data");
+                }
+                const data = await response.json();
+                setEducationData(data);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        };
+
+        fetchEducationData();
+    }, []);
+
+    const handleReadMore = (article) => {
+        setSelectedArticle(article);
+    };
+
+    const handleBack = () => {
+        setSelectedArticle(null);
+    };
+
+    return (
         <>
-            <Navbar/>
-            <header className="bg-white shadow">
+            <Navbar />
+            <header className="bg-white shadow" style={{backgroundColor:"#2C7865"}}>
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900">Education</h1>
                 </div>
             </header>
             <div className="edu-content">
-                {educationDummy.map((item,index)=>(
-                    <Card key={index} className="edu-card">
-                        <CardContent className="edu-content-card">
-                            <img src={item.image} alt={item.title} />
-                            <CardTitle>{item.title}</CardTitle>
-                            {item.description}
-                            <Button className="button">Read More</Button>
-                        </CardContent>
-                    </Card>
-                ))}
+                {selectedArticle ? (
+                    <div className="article-detail-container">
+                        <ArticleDetail article={selectedArticle} />
+                        <Button onClick={handleBack} className="button">Back</Button>
+                    </div>
+                ) : (
+                    educationData.map((item, index) => (
+                        <Card key={index} className="edu-card">
+                            <CardContent className="edu-content-card">
+                                <img src={`${item.picture}`} alt={item.title} />
+                                <CardTitle>{item.title}</CardTitle>
+                                <p>{item.article}</p>
+                                <Button onClick={() => handleReadMore(item)} className="button">Read More</Button>
+                            </CardContent>
+                        </Card>
+                    ))
+                )}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Education
+export default Education;
