@@ -13,6 +13,10 @@ const totalPriceSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    trashClass: {
+        type: [String], // Ensure this is an array of strings
+        required: true
     }
 }, { collection: "total" });
 

@@ -17,8 +17,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// "mongodb://127.0.0.1:27017/bankSampah"
 mongoose
-  .connect("mongodb://127.0.0.1:27017/bankSampah", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

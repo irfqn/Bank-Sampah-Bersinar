@@ -2,10 +2,11 @@
 import { useState, useRef } from "react";
 import { Webcam } from "../../utils/webcam";
 
+// eslint-disable-next-line no-unused-vars
 const ButtonHandler = ({ imageRef, cameraRef, videoRef }) => {
   const [streaming, setStreaming] = useState(null); // streaming state
   const inputImageRef = useRef(null); // video input reference
-  const inputVideoRef = useRef(null); // video input reference
+  // const inputVideoRef = useRef(null); // video input reference
   const webcam = new Webcam(); // webcam handler
 
   // closing image
@@ -21,19 +22,19 @@ const ButtonHandler = ({ imageRef, cameraRef, videoRef }) => {
 
   // closing video streaming
   // closing video streaming
-const closeVideo = () => {
-    if (videoRef.current) { // Add null check
-      const url = videoRef.current.src;
-      videoRef.current.src = ""; // restore video source
-      URL.revokeObjectURL(url); // revoke url
+// const closeVideo = () => {
+//     if (videoRef.current) { // Add null check
+//       const url = videoRef.current.src;
+//       videoRef.current.src = ""; // restore video source
+//       URL.revokeObjectURL(url); // revoke url
   
-      setStreaming(null); // set streaming to null
-      inputVideoRef.current.value = ""; // reset input video
-      if (videoRef.current.style) { // Add null check
-        videoRef.current.style.display = "none"; // hide video
-      }
-    }
-  };
+//       setStreaming(null); // set streaming to null
+//       inputVideoRef.current.value = ""; // reset input video
+//       if (videoRef.current.style) { // Add null check
+//         videoRef.current.style.display = "none"; // hide video
+//       }
+//     }
+//   };
   
 
   return (
@@ -66,7 +67,7 @@ const closeVideo = () => {
       </button>
 
       {/* Video Handler */}
-      <input
+      {/* <input
         type="file"
         accept="video/*"
         style={{ display: "none" }}
@@ -91,7 +92,7 @@ const closeVideo = () => {
         className="buttontd"
       >
         {streaming === "video" ? "Close" : "Open"} Video
-      </button>
+      </button> */}
 
       {/* Webcam Handler */}
       <button

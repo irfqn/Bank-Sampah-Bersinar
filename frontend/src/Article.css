@@ -1,0 +1,17 @@
+.article-detail{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.article-detail img{
+    width: 20rem;
+    height: 18rem;
+    border-radius: 1rem;
+}
+
+.article-detail h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}

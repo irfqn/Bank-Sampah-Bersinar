@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-.content {
+.login-content {
   height: 100vh;
   display: flex;
   justify-content: center;

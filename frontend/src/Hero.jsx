@@ -178,7 +178,7 @@ const Main = () => {
     <div className="mainContainer">
       <h1 className="heroTitle">Pantau dan Hitung Kontribusi Anda!</h1>
       <p>Selamat datang di platform kami! Pantau dan hitung kontribusi Anda dalam mengelola tabungan sampah dengan mudah. Bergabunglah sekarang untuk mulai berpartisipasi dalam pelestarian lingkungan!</p>
-      <Button className="button2" onClick={()=>navigate("/register")}>Register Now!</Button>
+      <Button className="button2" onClick={()=>navigate("/register2")}>Register Now!</Button>
     </div>
   );
 };
