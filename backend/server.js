@@ -7,7 +7,7 @@ const cors = require('cors');
 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Setup body-parser with limit option
 app.use(bodyParser.json({ limit: "50mb" }));
