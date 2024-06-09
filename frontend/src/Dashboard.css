@@ -235,9 +235,9 @@
 
 .content{
     width: 100%;
-    height: 120vh;
+    height: 75vh;
     display: flex;
-    padding: 2rem;
+    padding: 1rem;
     overflow: hidden;
 }
 
@@ -246,6 +246,8 @@
     flex-direction: column;
     row-gap: 0.5rem;
     flex: 50%;
+    max-width: 50%;
+    /* flex-grow: 1; */
     padding-inline: 1rem;
     box-sizing: border-box;
 }
@@ -286,24 +288,42 @@
 
 .carousel-content{
     display: flex;
+    /* row-gap: 1rem; */
+    column-gap: 1rem;
+}
+
+.carousel-content-child{
+    display: flex;
     flex-direction: column;
-    row-gap: 1rem;
+    row-gap: 0.5rem;
+    box-sizing: border-box;
+    justify-content: center;
+    /* padding-inline: 1rem; */
 }
 
 .gambar{
-    width: 15rem;
-    height: 13rem;
+    width: 13rem;
+    height: 10rem;
     border-radius: 1rem;
 }
 
+.judul{
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    line-height: 1rem;
+}
+
 .article {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8rem;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;  
     overflow: hidden;
     text-overflow: ellipsis;
-    height: calc(1.2em * 4); /* Approximate line height times the number of lines */
-    line-height: 1.2em; /* Adjust line height as needed */
+    height: calc(1.2em * 4);
+    line-height: 1.2em;
 }
   
 
@@ -316,10 +336,37 @@
 
 .history{
     width: 600px;
-    height: 37rem;
+    height: 100%;
+    max-height: 100vh;
     background-color: white;
     overflow: scroll;
 }
+
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.375rem;
+  }
+  
+  .badge-yellow {
+    background-color: #ffc107;
+  }
+  
+  .badge-green {
+    background-color: #28a745;
+  }
+  
+  .badge-red {
+    background-color: #dc3545;
+  }
+  
 
 /* Tampilan untuk perangkat mobile */
 @media (max-width: 767px) {
@@ -327,23 +374,38 @@
     .content {
         flex-direction: column;
         padding: 1rem;
-        height: auto;
+        height: 100vh;
+        overflow: scroll;
     }
 
     .kiri, .kanan {
         flex: 100%;
         padding: 0.5rem;
+        max-width: none;
     }
 
     .price {
         /* flex-direction: column; */
         /* padding: 0; */
+        /* flex-wrap: wrap; */
+        padding: 0.2rem;
     }
 
-    .current-price, .predict-price {
-        flex: 100%;
-        margin-right: 0;
-        margin-bottom: 1rem;
+    .current-price h1{
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .predict-price h1{
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .carousel-content{
+        flex-direction: column;
+        row-gap: 1rem;
     }
 
     .gambar {
@@ -352,7 +414,7 @@
 
     .history {
         width: 100%;
-        height: auto;
+        height: 50vh;
         /* max-height: 37rem; */
     }
 }
@@ -363,6 +425,15 @@
     .content{
         width: auto;
         flex-wrap: wrap;
+        max-width: 100%;
+        /* max-width: none; */
+        overflow: scroll;
+    }
+
+    .kiri, .kanan {
+        flex: 100%;
+        padding: 0.5rem;
+        max-width: none;
     }
 
     .history{

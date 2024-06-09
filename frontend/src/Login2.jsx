@@ -139,14 +139,14 @@ const Login2 = () => {
     return true;
   };
 
+  
+
   const handleLogin = () => {
+    console.log(email)
     if (validateForm()) {
-      // Check if the entered credentials are for admin
       if (email === "admin@gmail.com" && password === "Admin123$%") {
-        // Redirect to admin page
         navigate("/admin");
       } else {
-        // If not admin, proceed with normal user login
         fetch("http://localhost:3000/api/user/login", {
           method: "POST",
           headers: {
@@ -156,24 +156,28 @@ const Login2 = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            // Handle response from backend
-            console.log(data);
-            const token = data.token;
-            document.cookie = `token=${token}; Secure; SameSite=None;`;
-            navigate("/dashboard");
+            if (data.token) {
+              document.cookie = `token=${data.token}; Secure; SameSite=None;`;
+              navigate("/dashboard");
+            } else {
+              setErrorMessage(data.error || "Login failed. Please try again.");
+              console.log(data)
+            }
           })
           .catch((error) => {
             console.error("Error:", error);
+            setErrorMessage("An error occurred. Please try again.");
           });
       }
     }
   };
+  
 
   return (
     <WavyBackground>
       <div className="container">
         <Header />
-        <div className="content">
+        <div className="login-content">
           <Content 
             email={email}
             setEmail={setEmail}

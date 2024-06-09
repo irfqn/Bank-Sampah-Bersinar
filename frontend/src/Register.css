@@ -1,8 +1,8 @@
-.card{
+.register-card{
     background-color: white;
 }
 
-.content{
+.register-content{
     display: flex;
     justify-content: center;
 }

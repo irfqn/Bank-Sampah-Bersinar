@@ -2,22 +2,25 @@ const TotalPrice = require("../model/totalModel");
 
 exports.createTotalPrice = async (req, res) => {
     try {
-        const { totalHarga } = req.body;
-        const userId = req.user._id; // Ambil ID pengguna dari sesi atau token otentikasi
+        const { totalHarga, detectedClasses } = req.body;
+        const userId = req.user._id;
 
-        // Validasi input
-        if (!totalHarga) {
-            return res.status(400).json({ error: "Total harga is required" });
+        // Debugging: log the incoming data
+        console.log('Received data:', { totalHarga, detectedClasses });
+
+        if (!totalHarga || !detectedClasses || !Array.isArray(detectedClasses)) {
+            return res.status(400).json({ error: "Total harga and detected classes are required and must be an array" });
         }
 
-        // Simpan total harga ke dalam database bersamaan dengan ID pengguna
-        const totalPrice = await TotalPrice.create({ user: userId, totalHarga });
+        const totalPrice = await TotalPrice.create({ user: userId, totalHarga, trashClass: detectedClasses });
 
         res.status(201).json(totalPrice);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
+
+
 
 exports.getTotalPrice = async (req, res) => {
     try {

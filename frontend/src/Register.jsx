@@ -198,9 +198,9 @@ const Register = () => {
 
   return (
     <WavyBackground>
-      <div className="container">
+      <div className="register-container">
         <Header />
-        <div className="content">
+        <div className="register-content">
           <Content 
             email={email}
             setEmail={setEmail}
@@ -223,7 +223,7 @@ const Content = ({ email, setEmail, password, setPassword, handleRegister }) => 
   const navigate=useNavigate()
 
   return (
-    <Card className="w-[350px] card">
+    <Card className="w-[350px] register-card">
       <CardHeader>
         <CardTitle className="cardTitle">Register Account</CardTitle>
         <CardDescription>Welcome back! select method to login</CardDescription>

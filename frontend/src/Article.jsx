@@ -3,6 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 import React from "react";
+import "./Article.css"
 
 const ArticleDetail = ({ article }) => {
   return (

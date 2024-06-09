@@ -145,8 +145,12 @@ userSchema.statics.login = async function (email, password) {
     throw Error("the email or password should be filled");
   }
 
+  console.log(email)
+  console.log(password)
+
   // email existing check
   const user = await this.findOne({ email });
+  console.log(user)
   if (!user) {
     throw Error("Incorrect email");
   }

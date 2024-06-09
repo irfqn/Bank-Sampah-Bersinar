@@ -23,6 +23,7 @@
     box-sizing: border-box;
     padding: 1rem;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .prd-kiri{
