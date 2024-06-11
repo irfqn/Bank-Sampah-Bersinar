@@ -139,16 +139,13 @@ const Login2 = () => {
     return true;
   };
 
-  console.log("backend url:",process.env.REACT_APP_BACKEND_URL)
-  const backendurl = process.env.REACT_APP_BACKEND_URL
-
   const handleLogin = () => {
     console.log(email)
     if (validateForm()) {
       if (email === "admin@gmail.com" && password === "Admin123$%") {
         navigate("/admin");
       } else {
-        fetch(`https://bank-sampah-bersinar-awf4.vercel.app/api/user/login`, {
+        fetch(`https://bank-sampah-bersinar.onrender.com/api/user/login`, {
           mode: 'no-cors',
           method: "POST",
           headers: {
