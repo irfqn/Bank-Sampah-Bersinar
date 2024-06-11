@@ -139,7 +139,8 @@ const Login2 = () => {
     return true;
   };
 
-  
+  console.log("backend url:",process.env.REACT_APP_BACKEND_URL)
+  const backendurl = process.env.REACT_APP_BACKEND_URL
 
   const handleLogin = () => {
     console.log(email)
@@ -147,7 +148,7 @@ const Login2 = () => {
       if (email === "admin@gmail.com" && password === "Admin123$%") {
         navigate("/admin");
       } else {
-        fetch("http://localhost:3000/api/user/login", {
+        fetch(`https://backend-bank-sampah.vercel.app/api/user/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
