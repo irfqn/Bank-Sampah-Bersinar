@@ -148,7 +148,7 @@ const Login2 = () => {
       if (email === "admin@gmail.com" && password === "Admin123$%") {
         navigate("/admin");
       } else {
-        fetch(`https://backend-bank-sampah.vercel.app/api/user/login`, {
+        fetch(`https://bank-sampah-bersinar-awf4.vercel.app/api/user/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
