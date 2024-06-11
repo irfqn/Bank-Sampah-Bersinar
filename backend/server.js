@@ -14,7 +14,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // Konfigurasi CORS
-const allowedOrigins = ['https://bank-sampah-bersinar-m1ec.vercel.app/']; // Ganti dengan URL frontend Anda
+const allowedOrigins = ['https://bank-sampah-bersinar-m1ec-armw8x302.vercel.app']; // Ganti dengan URL frontend Anda
 
 const corsOptions = {
   origin: function (origin, callback) {
