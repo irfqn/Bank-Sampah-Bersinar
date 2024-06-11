@@ -149,6 +149,7 @@ const Login2 = () => {
         navigate("/admin");
       } else {
         fetch(`https://bank-sampah-bersinar-awf4.vercel.app/api/user/login`, {
+          mode: 'no-cors',
           method: "POST",
           headers: {
             "Content-Type": "application/json",
