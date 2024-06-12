@@ -1022,7 +1022,7 @@ const TrashDetection = () => {
       try {
         const currentDate = new Date();
         const currentMonth = currentDate.toISOString().slice(0, 7);
-        const response = await fetch(`http://localhost:3000/api/user/getPrice?month=${currentMonth}`);
+        const response = await fetch(`https://bank-sampah-bersinar.onrender.com/api/user/getPrice?month=${currentMonth}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data prices");
         }
@@ -1091,7 +1091,7 @@ const getCookie = (name) => {
 const submitTotalHarga = async (totalHarga, detectedClasses) => {
   try {
     const token = getCookie("token");
-    const response = await fetch("http://localhost:3000/api/user/totalHarga", {
+    const response = await fetch("https://bank-sampah-bersinar.onrender.com/api/user/totalHarga", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

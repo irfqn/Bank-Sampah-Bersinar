@@ -59,10 +59,10 @@ export default function Dashboard() {
     const token = getCookie("token");
 
     Promise.all([
-      fetchData("http://localhost:3000/api/user/getTotalHarga", token).then(setTotalHarga),
-      fetchData("http://localhost:3000/api/user/getStatus", token).then(setTransaction),
-      fetchData(`http://localhost:3000/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
-      fetchData("http://localhost:3000/api/user/education").then(data => setEducation(data.reverse())),
+      fetchData("https://bank-sampah-bersinar.onrender.com/api/user/getTotalHarga", token).then(setTotalHarga),
+      fetchData("https://bank-sampah-bersinar.onrender.com/api/user/getStatus", token).then(setTransaction),
+      fetchData(`https://bank-sampah-bersinar.onrender.com/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
+      fetchData("https://bank-sampah-bersinar.onrender.com/api/user/education").then(data => setEducation(data.reverse())),
     ]).catch(error => console.error("Error fetching data:", error));
   }, []);
 
