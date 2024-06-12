@@ -133,11 +133,13 @@ const Login2 = () => {
 
   const validateForm = () => {
     if (!email.trim() || !password.trim()) {
-      setErrorMessage("Please fill in all fields.");
+      setErrorMessage("Please fill in all the fields.");
       return false;
     }
     return true;
   };
+
+  
 
   const handleLogin = () => {
     console.log(email)
@@ -145,8 +147,7 @@ const Login2 = () => {
       if (email === "admin@gmail.com" && password === "Admin123$%") {
         navigate("/admin");
       } else {
-        fetch(`https://bank-sampah-bersinar.onrender.com/api/user/login`, {
-          mode: 'no-cors',
+        fetch("http://localhost:3000/api/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

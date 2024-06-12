@@ -7,29 +7,13 @@ const cors = require('cors');
 
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 
 // Setup body-parser with limit option
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-// Konfigurasi CORS
-const allowedOrigins = ['https://bank-sampah-bersinar-m1ec.vercel.app']; // Ganti dengan URL frontend Anda
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log('Origin:', origin); // Log asal permintaan
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
