@@ -987,7 +987,8 @@ const TrashDetection = () => {
   useEffect(() => {
     tf.ready().then(async () => {
       await tf.ready();
-      const modelUrl = `${window.location.origin}/best_web_model/model.json`;
+      // const modelUrl = `${window.location.origin}/best_web_model/model.json`;
+      const modelUrl = `../best_web_model/model.json`;
       const yolov8 = await tf.loadGraphModel(modelUrl);
       console.log(yolov8);
 
