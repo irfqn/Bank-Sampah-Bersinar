@@ -127,11 +127,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <img className="h-11 w-auto" src={bankBersinarLogo} alt="" />
             </a>
             <button
               type="button"
@@ -151,18 +147,11 @@ const Header = () => {
                     href={item.href}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    {item.name}
+                    <img src={item.src} alt={item.name} className="h-5 w-auto" />
                   </a>
                 ))}
               </div>
-              <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
-              </div>
+              <Button className="button1" onClick={()=>navigate('/login')}>Login</Button>
             </div>
           </div>
         </Dialog.Panel>

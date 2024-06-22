@@ -12,7 +12,7 @@
 }
 
 .mainContainer{
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@
   color: #2C7865;
   text-align: center;
   width: 65%;
-  margin-block-start: 10rem;
+  /* margin-block-start: 4rem; */
 }
 
 .mainContainer p{
@@ -49,4 +49,28 @@
 
 .button2:hover{
   background-color: #2C7865;
+}
+
+/* Tampilan mobile */
+@media(max-width:767px){
+  .heroTitle{
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .mainContainer p{
+    font-size: 14px;
+  }
+}
+
+/* Tampilan tablet */
+@media(min-width:768px) and (max-width:1023px){
+  .mainContainer{
+    margin-block: 1rem;
+  }
+
+  .heroTitle{
+    font-size: 56px;
+    line-height: 56px;
+  }
 }
