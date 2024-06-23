@@ -230,7 +230,13 @@ import "./Register2.css";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  return <img src={bankBersinarLogo} className="logo" alt="Bank Bersinar Logo" />;
+  const navigate=useNavigate()
+
+  const handleLogoClick=()=>{
+    navigate("/")
+  }
+
+  return <img src={bankBersinarLogo} className="logo" alt="Bank Bersinar Logo" onClick={handleLogoClick}/>;
 };
 
 const Register2 = () => {
@@ -299,7 +305,7 @@ const Register2 = () => {
 
   return (
     <WavyBackground>
-      <div className="register-container">
+      <div className="regist-container">
         <Header />
         <div className="register-content">
           <Content formData={formData} handleChange={handleChange} handleRegister={handleRegister} loading={loading} />
@@ -313,7 +319,7 @@ const Content = ({ formData, handleChange, handleRegister, loading }) => {
   const navigate = useNavigate();
 
   return (
-    <Card className="w-[400px] card">
+    <Card className="w-[400px] register-card">
       <CardHeader>
         <CardTitle className="cardTitle">Register Account</CardTitle>
         <CardDescription>Welcome back! Select method to login</CardDescription>

@@ -147,7 +147,7 @@ const Login2 = () => {
       if (email === "admin@gmail.com" && password === "Admin123$%") {
         navigate("/admin");
       } else {
-        fetch("https://bank-sampah-bersinar.onrender.com/api/user/login", {
+        fetch("http://localhost:3000/api/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -193,7 +193,13 @@ const Login2 = () => {
 };
 
 const Header = () => {
-  return <img src={bankBersinarLogo} className="logo" />;
+  const navigate=useNavigate()
+
+  const handleLogoClick =()=>{
+    navigate("/")
+  }
+
+  return <img src={bankBersinarLogo} className="logo" onClick={handleLogoClick}/>;
 };
 
 // eslint-disable-next-line react/prop-types
@@ -201,7 +207,7 @@ const Content = ({ email, setEmail, password, setPassword, errorMessage ,handleL
   const navigate=useNavigate()
 
   return (
-    <Card className="w-[350px] card">
+    <Card className="w-[350px] login-card">
       <CardHeader>
         <CardTitle className="cardTitle">Log in to Your Account</CardTitle>
         <CardDescription>Welcome back! select method to login</CardDescription>

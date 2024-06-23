@@ -10,12 +10,12 @@
 }
 
 .login-content {
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
 }
 
-.card {
+.login-card {
   margin-block: 8rem;
   background-color: white;
 }
