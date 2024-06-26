@@ -5,6 +5,7 @@ const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
 const cors = require('cors');
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -12,16 +13,9 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-// Setup CORS
 app.use(cors());
-
-// Additional CORS settings if needed
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // "mongodb://127.0.0.1:27017/bankSampah"
 mongoose
