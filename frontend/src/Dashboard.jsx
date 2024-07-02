@@ -53,18 +53,94 @@ export default function Dashboard() {
   const [totalHarga, setTotalHarga] = useState([]);
   const [transaction, setTransaction] = useState([]);
   const [prices, setPrices] = useState([]);
+  const [predictedPrices, setPredictedPrices] = useState([]);
   const [education, setEducation] = useState([]);
+  const classMapping = {
+    'P5': 'P5', 
+    'P7': 'P7-P8', 
+    'P7 - Tutup': 'P7-P8', 
+    'P12 - MIX': 'P12-Mix. BM- Bening-P14', 
+    'P12 - BM': 'P12-Mix. BM- Bening-P14', 
+    'P12 - BENING': 'P12-Mix. BM- Bening-P14', 
+    'P14': 'P12-Mix. BM- Bening-P14', 
+    'P1': 'P20', 
+    'P8': 'P20', 
+    'P21': 'P21', 
+    'P9': 'P22-P23', 
+    'P20': 'P22-P23', 
+    'P22': 'P22-P23', 
+    'P23': 'P22-P23', 
+    'P26': 'P29', 
+    'P29': 'P29', 
+    'P31': 'P31-Galon Le-mineral', 
+    'Lemineral': 'Le-mineral', 
+    'P34': 'P17-P34-P37-Kemasan', 
+    'P38': 'P38-P39', 
+    'P39': 'P38-P39', 
+    'PM': 'S1-A3', 
+    'B8': 'B8-B9', 
+    'B9': 'B8-B9', 
+    'BW': 'BW-Bening-Warna', 
+    'Bening': 'BW-Bening-Warna', 
+    'Warna': 'BW-Bening-Warna', 
+    'K1': 'K1-K3-K4-K5-K6-K7-Tabloid', 
+    'K3': 'K1-K3-K4-K5-K6-K7-Tabloid', 
+    'K4': 'K1-K3-K4-K5-K6-K7-Tabloid', 
+    'K5': 'K1-K3-K4-K5-K6-K7-Tabloid', 
+    'K6': 'K1-K3-K4-K5-K6-K7-Tabloid', 
+    'K7': 'K1-K3-K4-K5-K6-K7-Tabloid', 
+    'Tabloid': 'K1-K3-K4-K5-K6-K7-Tabloid', 
+    'K2': 'K2', 
+    'Kemasan Obat': 'Kemasan Obat', 
+    'Mika': 'Mika'
+  };
 
   useEffect(() => {
     const token = getCookie("token");
 
     Promise.all([
-      fetchData("https://bank-sampah-bersinar.onrender.com/api/user/getTotalHarga", token).then(setTotalHarga),
-      fetchData("https://bank-sampah-bersinar.onrender.com/api/user/getStatus", token).then(setTransaction),
-      fetchData(`https://bank-sampah-bersinar.onrender.com/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
-      fetchData("https://bank-sampah-bersinar.onrender.com/api/user/education").then(data => setEducation(data.reverse())),
+      fetchData("http://localhost:3000/api/user/getTotalHarga", token).then(setTotalHarga),
+      fetchData("http://localhost:3000/api/user/getStatus", token).then(setTransaction),
+      fetchData(`http://localhost:3000/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
+      fetchData("http://localhost:3000/api/user/education").then(data => setEducation(data.reverse())),
     ]).catch(error => console.error("Error fetching data:", error));
-  }, []);
+
+    // Fetch predicted prices for next month
+    const fetchPredictedPrices = async () => {
+      try {
+        const nextMonth = new Date();
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
+        const nextMonthStr = nextMonth.toISOString().slice(0, 7); // Format YYYY-MM
+        
+        const promises = totalHarga.map(async transaksi => {
+          return Promise.all(transaksi.trashClass.map(async trashClassItem => {
+            const mappedTrashType = classMapping[trashClassItem] || trashClassItem;
+            const response = await fetch("http://localhost:5000/api/predict", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                trash_type: mappedTrashType,
+                month: parseInt(nextMonthStr.split("-")[1], 10), // Extract month as an integer
+              }),
+            });
+
+            const data = await response.json();
+            return response.ok ? data.prediction : 0;
+          }));
+        });
+
+        const results = await Promise.all(promises);
+        const predictedTotalPrices = results.map(predictions => predictions.reduce((sum, price) => sum + price, 0));
+        setPredictedPrices(predictedTotalPrices);
+      } catch (error) {
+        console.error("Error fetching predicted prices:", error);
+      }
+    };
+
+    fetchPredictedPrices();
+  }, [totalHarga]);
 
   const getCurrentMonthYear = () => {
     const date = new Date();
@@ -86,6 +162,11 @@ export default function Dashboard() {
     }, 0);
 
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalPrice);
+  };
+
+  const calculatePredictedTotalHarga = () => {
+    const totalPredictedPrice = predictedPrices.reduce((total, price) => total + price, 0);
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalPredictedPrice);
   };
 
   return (
@@ -116,7 +197,7 @@ export default function Dashboard() {
                     <CardDescription>{`on ${getNextMonthYear()}`}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <h1>{calculateTotalHarga()}</h1>
+                    <h1>{calculatePredictedTotalHarga()}</h1>
                   </CardContent>
                 </Card>
               </div>

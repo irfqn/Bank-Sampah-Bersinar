@@ -57,7 +57,7 @@ const Prediction = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/predict", {
+      const response = await fetch("https://bank-sampah-bersinar.onrender.com/api/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
