@@ -1,6 +1,6 @@
 #!/bin/bash
 # Start Python server
-python backend/app.py &
+python app.py &
 
 # Start Node.js server
 cd backend
