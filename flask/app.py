@@ -97,6 +97,7 @@ import pickle
 import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from sklearn.ensemble import RandomForestRegressor  # Tambahkan ini untuk memastikan sklearn diimport
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -203,11 +204,6 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
-
-
-
-
-
 
 
 
