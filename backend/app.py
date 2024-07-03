@@ -105,26 +105,14 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 MODEL_URL = "https://bank-sampah-bersinar.web.app/random_forest_regressor.pkl"
 
 # Unduh model dari Firebase Hosting
-try:
-    response = requests.get(MODEL_URL)
-    response.raise_for_status()  # Menambahkan penanganan error untuk HTTP request
-    model_path = os.path.join(os.getcwd(), 'random_forest_regressor.pkl')
-    with open(model_path, 'wb') as f:
-        f.write(response.content)
-except requests.exceptions.RequestException as e:
-    print(f"Error downloading the model: {e}")
-    model_path = None
+response = requests.get(MODEL_URL)
+model_path = os.path.join(os.getcwd(), 'random_forest_regressor.pkl')
+with open(model_path, 'wb') as f:
+    f.write(response.content)
 
-# Muat model yang telah dilatih jika berhasil diunduh
-if model_path:
-    try:
-        with open(model_path, 'rb') as f:
-            model = pickle.load(f)
-    except Exception as e:
-        print(f"Error loading the model: {e}")
-        model = None
-else:
-    model = None
+# Muat model yang telah dilatih
+with open(model_path, 'rb') as f:
+    model = pickle.load(f)
 
 trash_type_dict = {
     'B8-B9': 0,
@@ -148,31 +136,27 @@ trash_type_dict = {
     'S1-A3': 18,
 }
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Flask server is running"
+
 @app.route('/api/predict', methods=['POST'])
 def predict():
-    if not model:
-        return jsonify({'error': 'Model not loaded'}), 500
-
     data = request.json
-    trash_type = data.get('trash_type')
-    month = data.get('month')
+    trash_type = data['trash_type']
+    month = int(data['month'])
 
-    if trash_type not in trash_type_dict:
-        return jsonify({'error': 'Invalid trash type'}), 400
-
-    if not isinstance(month, int):
-        return jsonify({'error': 'Invalid month'}), 400
-
-    trash_type_encoded = trash_type_dict[trash_type]
-    features = [[trash_type_encoded, month]]
-    try:
+    if trash_type in trash_type_dict:
+        trash_type_encoded = trash_type_dict[trash_type]
+        features = [[trash_type_encoded, month]]
         prediction = model.predict(features)
         return jsonify({'prediction': prediction[0]})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    else:
+        return jsonify({'error': 'Invalid trash type'}), 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(debug=True, port=5001)
+
 
 
 
