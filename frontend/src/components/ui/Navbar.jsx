@@ -1,18 +1,18 @@
-import { Fragment, useState } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 import bankBersinarLogo from "../../assets/img/bank-bersinar-logo.png";
 import { Button } from './button';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { deleteTokenFromCookie } from '@/utils/authUtils';
-import { useNavigate } from "react-router-dom";
-import userIcon from "../../assets/img/user.jpg"
-import "./Navbar.css"
+import { useNavigate, Link } from "react-router-dom";
+import userIcon from "../../assets/img/user.jpg";
+import "./Navbar.css";
 
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
-  imageUrl: userIcon
-}
+  imageUrl: userIcon,
+};
 
 const initialNavigation = [
   { name: 'Dashboard', href: '/dashboard', current: true },
@@ -20,15 +20,15 @@ const initialNavigation = [
   { name: 'Price Prediction', href: '/prediction', current: false },
   { name: 'Form', href: '/form', current: false },
   { name: 'Education', href: '/education', current: false },
-]
+];
 
 const userNavigation = [
   { name: 'Your Profile', href: '/profile' },
   { name: 'Sign out', href: '/' },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 const Navbar = () => {
@@ -37,20 +37,19 @@ const Navbar = () => {
   const [currentNav, setCurrentNav] = useState(initialNavigation.find(item => item.current).name);
 
   const handleLogout = () => {
-    deleteTokenFromCookie()
-    navigate("/")
-  }
+    deleteTokenFromCookie();
+    navigate("/");
+  };
 
   const handleNavClick = (name, href) => {
     const updatedNavigation = navigation.map(item => ({
       ...item,
-      current: item.name === name
+      current: item.name === name,
     }));
     setCurrentNav(name); // Perbarui currentNav saat item navigasi diklik
     setNavigation(updatedNavigation);
     navigate(href);
-  }
-  
+  };
 
   return (
     <Disclosure as="nav">
@@ -68,7 +67,7 @@ const Navbar = () => {
                 </div>
                 <div className="hidden md:block">
                   <div className='ml-10 flex items-baseline space-x-4'>
-                    {initialNavigation.map((item) => (
+                    {navigation.map((item) => (
                       <Button
                         key={item.name}
                         onClick={() => handleNavClick(item.name, item.href)}
@@ -109,8 +108,8 @@ const Navbar = () => {
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
-                              <a
-                                href={item.href}
+                              <Link
+                                to={item.href}
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -118,7 +117,7 @@ const Navbar = () => {
                                 onClick={item.name === 'Sign out' ? handleLogout : null}
                               >
                                 {item.name}
-                              </a>
+                              </Link>
                             )}
                           </Menu.Item>
                         ))}
@@ -144,11 +143,11 @@ const Navbar = () => {
 
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-              {initialNavigation.map((item) => (
+              {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
-                  href={item.href}
+                  as={Link}
+                  to={item.href}
                   className={classNames(
                     item.name === currentNav ? 'bg-[#2C7865] text-white' : 'text-gray-300',
                     'hover-darkorange',
@@ -176,8 +175,8 @@ const Navbar = () => {
                 {userNavigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
-                    as="a"
-                    href={item.href}
+                    as={Link}
+                    to={item.href}
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                     onClick={item.name === 'Sign out' ? handleLogout : null}
                   >
@@ -190,7 +189,7 @@ const Navbar = () => {
         </>
       )}
     </Disclosure>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
