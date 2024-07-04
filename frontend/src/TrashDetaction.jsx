@@ -12,12 +12,6 @@ import { detect, detect2, detectVideo } from "./utils/detect";
 import "./TrashDetaction.css";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell, TableFooter } from "./components/ui/table";
 
-const videoConstraints = {
-  width: 1280,
-  height: 720,
-  facingMode: "user"
-};
-
 const TrashDetection = () => {
   const [loading, setLoading] = useState({ loading: true, progress: 0 });
   const [model, setModel] = useState({
@@ -28,12 +22,19 @@ const TrashDetection = () => {
   const [detectedScores, setDetectedScores] = useState([]);
   const [isScanCompleted, setIsScanCompleted] = useState(false);
   const [prices, setPrices] = useState([]);
+  const [facingMode, setFacingMode] = useState("user");
 
   const webcamRef = useRef(null);
   const imageRef = useRef(null);
   const cameraRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const videoConstraints = {
+    width: 1280,
+    height: 720,
+    facingMode: facingMode // Dynamically set facingMode
+  };
 
   const modelName = "best";
 
@@ -134,6 +135,10 @@ const TrashDetection = () => {
     setDetectedScores((prevScores) => prevScores.filter((_, i) => i !== index));
   };
 
+  const toggleFacingMode = () => {
+    setFacingMode((prevMode) => (prevMode === "user" ? { exact: "environment" } : "user"));
+  };
+
   return (
     <>
       <Navbar />
@@ -168,6 +173,9 @@ const TrashDetection = () => {
                     style={{ marginTop: '10px' }}
                   />
                   <Button className="bg-black text-white mt-3" onClick={handleCapture}>Scan</Button>
+                  <Button className="bg-black text-white mt-3" onClick={toggleFacingMode}>
+                    {facingMode === "user" ? "Use Back Camera" : "Use Front Camera"}
+                  </Button>
                 </div>
               </>
             ) : (
@@ -296,4 +304,3 @@ const DetectionResult = ({ detectedClasses, detectedScores, prices, onDeleteClas
 };
 
 export default TrashDetection;
-
