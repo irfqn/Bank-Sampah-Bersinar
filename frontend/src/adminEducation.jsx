@@ -42,7 +42,7 @@ const AdminEducation = () => {
 
             console.log(formData)
 
-            const response = await fetch("http://localhost:3000/api/user/postEdu", {
+            const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/postEdu", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

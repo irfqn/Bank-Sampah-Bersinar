@@ -166,7 +166,7 @@ const MitraMain = () => {
   useEffect(() => {
     const fetchMitraData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/user/mitra`, {
+        const response = await fetch(`https://bank-sampah-bersinar-2.onrender.com/api/user/mitra`, {
           method: "GET",
           headers: {
             "Content-Types": "Application/json",
@@ -200,7 +200,7 @@ const MitraMain = () => {
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/user/findMitra?name=${searchName}`,
+        `https://bank-sampah-bersinar-2.onrender.com/api/user/findMitra?name=${searchName}`,
         {
           method: "GET",
           headers: {

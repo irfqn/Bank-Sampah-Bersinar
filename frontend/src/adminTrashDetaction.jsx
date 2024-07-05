@@ -67,7 +67,7 @@ const TrashDetactionMain = () => {
       try {
         const currentDate = new Date();
         const currentMonth = currentDate.toISOString().slice(0, 7);
-        const response = await fetch(`http://localhost:3000/api/user/getPrice?month=${currentMonth}`);
+        const response = await fetch(`https://bank-sampah-bersinar-2.onrender.com/api/user/getPrice?month=${currentMonth}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data prices");
         }

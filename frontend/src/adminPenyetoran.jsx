@@ -168,7 +168,7 @@ const RequestTable = () => {
 
     const fetchFormData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/user/getAllForms');
+            const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/getAllForms');
             if (!response.ok) {
                 throw new Error('Failed to fetch form data');
             }
@@ -181,7 +181,7 @@ const RequestTable = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/user/users');
+            const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/users');
             if (!response.ok) {
                 throw new Error('Failed to fetch user data');
             }
@@ -233,7 +233,7 @@ const RequestTable = () => {
 
         console.log(postData)
 
-        const response = await fetch('http://localhost:3000/api/user/status', {
+        const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/status', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

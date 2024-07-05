@@ -147,7 +147,7 @@ const Login2 = () => {
       if (email === "admin@gmail.com" && password === "Admin123$%") {
         navigate("/admin");
       } else {
-        fetch("https://bank-sampah-bersinar.onrender.com/api/user/login", {
+        fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

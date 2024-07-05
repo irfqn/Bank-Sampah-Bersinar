@@ -145,7 +145,7 @@ const FormPenyetoran = () => {
         const fetchTotalHarga = async () => {
             try {
                 const token = getCookie("token");
-                const response = await fetch("http://localhost:3000/api/user/getTotalHarga", {
+                const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/getTotalHarga", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -200,7 +200,7 @@ const FormPenyetoran = () => {
         const fetchTotalPrice = async () => {
             try {
                 const token = getCookie("token");
-                const response = await fetch("http://localhost:3000/api/user/getTotalHarga", {
+                const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/getTotalHarga", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -241,7 +241,7 @@ const FormPenyetoran = () => {
         setSubmitError("");
         try {
             const token = getCookie("token");
-            const response = await fetch("http://localhost:3000/api/user/submitForm", {
+            const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/submitForm", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

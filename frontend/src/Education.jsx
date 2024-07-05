@@ -15,7 +15,7 @@ const Education = () => {
     useEffect(() => {
         const fetchEducationData = async () => {
             try {
-                const response = await fetch("http://localhost:3000/api/user/education");
+                const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/education");
                 if (!response.ok) {
                     throw new Error("Failed to fetch education data");
                 }

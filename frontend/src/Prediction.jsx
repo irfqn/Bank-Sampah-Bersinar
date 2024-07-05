@@ -85,7 +85,7 @@ const Prediction = () => {
     const mappedTrashType = classMapping[trashType] || trashType;
     const currentMonth = new Date().toISOString().slice(0, 7); // Current month in format YYYY-MM
     try {
-      const response = await fetch(`https://bank-sampah-bersinar.onrender.com/api/user/getPrice?month=${currentMonth}`);
+      const response = await fetch(`https://bank-sampah-bersinar-2.onrender.com/api/user/getPrice?month=${currentMonth}`);
       const data = await response.json();
       if (response.ok) {
         const filteredData = data.find(item => item.trash === mappedTrashType);
