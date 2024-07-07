@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
+    /* column-gap: 5rem; */
 }
 
 .form-title{
@@ -19,11 +20,11 @@
     font-weight: 400;
 }
 
-.form-card{
-    padding: 1rem;
+.form{
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
-
+    row-gap: 0.5rem;
 }
 
 .card-title{
@@ -78,7 +79,7 @@
     font-size: 1rem;
 }
 
-.rekening Input{
+.form Input{
     width: 20rem;
 }
 
@@ -86,4 +87,13 @@
     background-color: #206a4a;
     color: white;
     width: 7rem;
+}
+
+.pick-up{
+    display: flex;
+    align-items: center;
+}
+
+.pick-up-label{
+    margin-left: 10px;
 }
