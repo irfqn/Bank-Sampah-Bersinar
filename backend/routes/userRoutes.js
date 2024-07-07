@@ -47,7 +47,7 @@ router.post("/status", createTransaction);
 router.get("/getStatus", verifyToken, getAllTransactions);
 
 // PICKUP API
-router.get("/pickups", verifyToken, getAllPickups);
+router.get("/pickups", getAllPickups);
 router.post("/updatePickupStatus/:id", verifyToken, updatePickupStatus);
 
 module.exports = router;

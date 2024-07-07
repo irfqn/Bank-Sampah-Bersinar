@@ -35,28 +35,15 @@ const PickupMain = () => {
 
   const fetchPickupData = async () => {
     try {
-      const token = getCookie("token");
-      console.log("Token fetched:", token); // Log token to ensure it is fetched correctly
-
-      if (!token) {
-        throw new Error("Token not found");
-      }
-
       const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/pickups", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       });
-
       if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error("Unauthorized: Please check your token");
-        }
         throw new Error("Gagal mengambil data pickup");
       }
-
       return await response.json();
     } catch (error) {
       console.error("Error fetching pickup data:", error);
@@ -66,28 +53,15 @@ const PickupMain = () => {
 
   const fetchUserData = async () => {
     try {
-      const token = getCookie("token");
-      console.log("Token fetched:", token); // Log token to ensure it is fetched correctly
-
-      if (!token) {
-        throw new Error("Token not found");
-      }
-
       const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       });
-
       if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error("Unauthorized: Please check your token");
-        }
         throw new Error("Gagal mengambil data user");
       }
-
       return await response.json();
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -113,15 +87,9 @@ const PickupMain = () => {
       setPickups(mergedData);
     } catch (error) {
       console.error("Error merging data:", error);
-      setError(error.message);
     } finally {
       setLoading(false);
     }
-  };
-
-  const getCookie = (name) => {
-    const cookieValue = document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)");
-    return cookieValue ? cookieValue.pop() : "";
   };
 
   const formatDate = (dateString) => {
@@ -151,7 +119,6 @@ const PickupMain = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${getCookie("token")}`,
       },
       body: JSON.stringify(postData),
     });
