@@ -53,37 +53,13 @@ const PickupMain = () => {
     }
   };
 
-  const fetchUserData = async () => {
-    try {
-      const token = getCookie("token");
-      const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/users", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Gagal mengambil data user");
-      }
-      return await response.json();
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      throw error;
-    }
-  };
-
   const mergeData = async () => {
     try {
       const pickupData = await fetchPickupData();
-      const userData = await fetchUserData();
 
       const mergedData = pickupData.map((pickup) => {
-        const user = userData.find((user) => user._id === pickup.userId);
         return {
           ...pickup,
-          firstName: user ? user.firstName : "Unknown",
-          lastName: user ? user.lastName : "Unknown",
           status: pickup.status || "pending", // Default to "pending" if status is not set
         };
       });
@@ -155,7 +131,6 @@ const PickupMain = () => {
           <TableCaption>List of PickUp</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Phone</TableHead>
               <TableHead>Address</TableHead>
@@ -166,16 +141,15 @@ const PickupMain = () => {
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan="6">Loading...</TableCell>
+                <TableCell colSpan="5">Loading...</TableCell>
               </TableRow>
             ) : error ? (
               <TableRow>
-                <TableCell colSpan="6">{error}</TableCell>
+                <TableCell colSpan="5">{error}</TableCell>
               </TableRow>
             ) : pickups.length > 0 ? (
               pickups.map((pickup) => (
                 <TableRow key={pickup._id}>
-                  <TableCell>{pickup.firstName} {pickup.lastName}</TableCell>
                   <TableCell>{formatDate(pickup.createdAt)}</TableCell>
                   <TableCell>{pickup.phone}</TableCell>
                   <TableCell>{pickup.address}</TableCell>
@@ -198,7 +172,7 @@ const PickupMain = () => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan="6">No pickups found</TableCell>
+                <TableCell colSpan="5">No pickups found</TableCell>
               </TableRow>
             )}
           </TableBody>
