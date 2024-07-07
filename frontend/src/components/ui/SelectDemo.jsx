@@ -85,9 +85,9 @@ export function SelectDemo({ value, onChange }) {
 //   );
 // }
 
-export function SelectBank() {
+export function SelectBank({ value, onChange }) {
   return (
-    <Select className="bg-white">
+    <Select value={value} onValueChange={onChange} className="bg-white">
       <SelectTrigger className="w-[180px] bg-white">
         <SelectValue placeholder="Select bank/e-wallet" />
       </SelectTrigger>

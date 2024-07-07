@@ -120,7 +120,7 @@ import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { Switch } from "./components/ui/switch";
 import { Label } from "@radix-ui/react-label";
-import { SelectBank } from "./components/ui/SelectDemo"; // Mengimpor komponen SelectBank dari SelectDemo
+import { SelectBank } from "./components/ui/SelectDemo";
 import "./FormPenyetoran.css";
 
 const FormPenyetoran = () => {
