@@ -48,6 +48,6 @@ router.get("/getStatus", verifyToken, getAllTransactions);
 
 // PICKUP API
 router.get("/pickups", getAllPickups);
-router.post("/updatePickupStatus/:id", verifyToken, updatePickupStatus);
+router.post("/updatePickupStatus/:id", updatePickupStatus);
 
 module.exports = router;
