@@ -12,7 +12,15 @@ const pickupSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: true,
+    },
+    status: {
+        type: String,
+        default: "pending", // Set default value to "pending"
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 }, { collection: "pickup" });
 

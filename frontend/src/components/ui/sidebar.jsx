@@ -6,6 +6,7 @@ import { LiaWineBottleSolid } from "react-icons/lia";
 import { LuBookPlus } from "react-icons/lu";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { TbTruckDelivery } from "react-icons/tb";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
@@ -19,6 +20,7 @@ const Sidebar = () => {
     { title: "Pendataan Mitra", icon: LuBuilding, href:"/admin/pendataan" },
     { title: "Trash Detection", icon: LiaWineBottleSolid, href:"/admin/trash-detaction" },
     { title: "Trash Price", icon: LiaWineBottleSolid, href:"/admin/price" },
+    { title: "Pick Up", icon: TbTruckDelivery, href:"/admin/pickup" },
     { title: "Education", icon: LuBookPlus, href:"/admin/education" },
     { title: "Logout ", icon: FiLogOut, href:"/", gap: true },
   ];

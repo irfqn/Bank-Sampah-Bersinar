@@ -21,6 +21,7 @@ import AdminPendataan from "./adminPendataan.jsx";
 import AdminTrashDetaction from "./adminTrashDetaction.jsx";
 import AdminEducation from "./adminEducation.jsx";
 import AdminTPrice from "./adminTrashPrice.jsx";
+import AdminPickup from "./adminPickup.jsx";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/dashboard",
     element: <AdminDashboard/>,
+  },
+  {
+    path: "/admin/pickup",
+    element: <AdminPickup/>,
   },
 ]);
 

@@ -58,7 +58,22 @@ const getAllForms = async (req, res) => {
     }
 };
 
+const getUserFormsAndPickups = async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        const forms = await Form.find({ userId });
+        const pickups = await Pickup.find({ userId });
+
+        res.status(200).json({ forms, pickups });
+    } catch (error) {
+        console.error("Error fetching user forms and pickups:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
 module.exports = {
     submitForm,
     getAllForms,
+    getUserFormsAndPickups,
 };

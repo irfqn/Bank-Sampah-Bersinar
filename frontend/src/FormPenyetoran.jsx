@@ -1,118 +1,4 @@
-// import Navbar from "./components/ui/Navbar";
-// import { Card, CardContent } from "./components/ui/card";
-// import { SelectBank } from "./components/ui/SelectDemo";
-// import { Input } from "./components/ui/input";
-// import { CheckboxForm } from "./components/ui/checkbox2";
-// import { Button } from "./components/ui/button";
-// import "./FormPenyetoran.css";
-// import { useEffect, useState } from "react";
-
-// const FormPenyetoran = () => {
-//     const [totalHarga, setTotalHarga] = useState([]);
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState(null);
-
-//     useEffect(() => {
-//         const fetchTotalHarga = async () => {
-//             try {
-//                 const token = getCookie("token");
-//                 const response = await fetch("http://localhost:3000/api/user/getTotalHarga", {
-//                     method: "GET",
-//                     headers: {
-//                         "Content-Type": "application/json",
-//                         Authorization: `Bearer ${token}`,
-//                     },
-//                 });
-//                 if (response.ok) {
-//                     const data = await response.json();
-//                     setTotalHarga(data);
-//                 } else {
-//                     throw new Error("Failed to fetch total harga");
-//                 }
-//             } catch (error) {
-//                 setError("Error fetching total harga");
-//                 console.error("Error fetching total harga:", error);
-//             } finally {
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchTotalHarga();
-//     }, []);
-
-//     const getCookie = (name) => {
-//         const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-//         return cookieValue ? cookieValue.pop() : '';
-//     };
-
-//     const calculateTotalHarga = () => {
-//         let total = 0;
-//         totalHarga.forEach(item => {
-//             total += item.totalHarga;
-//         });
-
-//         const formattedTotalHarga = new Intl.NumberFormat('id-ID', {
-//             style: 'currency',
-//             currency: 'IDR'
-//         }).format(total);
-
-//         return formattedTotalHarga;
-//     };
-
-//     const getCurrentMonthYear = () => {
-//         const date = new Date();
-//         const month = date.toLocaleString('default', { month: 'long' });
-//         const year = date.getFullYear();
-//         return `${month} ${year}`;
-//     };
-
-//     return (
-//         <>
-//             <Navbar />
-//             <header className="bg-white shadow">
-//                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-//                     <h1 className="text-3xl font-bold tracking-tight text-gray-900">Form</h1>
-//                 </div>
-//             </header>
-//             <div className="form-content">
-//                 <div>
-//                     <h1 className="form-title">Deposit Your Trash Here!</h1>
-//                     <p className="form-description">Isi form ini untuk membuktikan anda sudah melakukan penyetoran sampah</p>
-//                 </div>
-//                 <Card className="form-card shadow-lg">
-//                     <CardContent className="form-card-content">
-//                         <div>
-//                             <p className="card-description">*Your last savings from {getCurrentMonthYear()}</p>
-//                         </div>
-//                         <div className="form-data">
-//                             <div className="each-data">
-//                                 <p>Price</p>
-//                                 <h1>{loading ? "Loading..." : error ? error : calculateTotalHarga()}</h1>
-//                             </div>
-//                             <div className="status"></div>
-//                         </div>
-//                         <div className="bank">
-//                             <p>Bank or E-Wallet</p>
-//                             <SelectBank />
-//                         </div>
-//                         <div className="rekening">
-//                             <p>No. Rekening or No. E-Wallet</p>
-//                             <Input />
-//                         </div>
-//                         <div className="validation-check">
-//                             <CheckboxForm />
-//                         </div>
-//                         <Button className="form-button">Submit</Button>
-//                     </CardContent>
-//                 </Card>
-//             </div>
-//         </>
-//     );
-// };
-
-// export default FormPenyetoran;
-
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/ui/Navbar";
 import { Card, CardContent } from "./components/ui/card";
@@ -121,6 +7,15 @@ import { Button } from "./components/ui/button";
 import { Switch } from "./components/ui/switch";
 import { Label } from "@radix-ui/react-label";
 import { SelectBank } from "./components/ui/SelectDemo";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import "./FormPenyetoran.css";
 
 const FormPenyetoran = () => {
@@ -136,6 +31,7 @@ const FormPenyetoran = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [pickupData, setPickupData] = useState([]);
 
   useEffect(() => {
     const fetchTotalHarga = async () => {
@@ -193,6 +89,31 @@ const FormPenyetoran = () => {
       fetchProfile();
     }
   }, [pickup]);
+
+  useEffect(() => {
+    const fetchPickupData = async () => {
+      try {
+        const token = getCookie("token");
+        const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/pickups", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setPickupData(data);
+        } else {
+          throw new Error("Gagal mengambil data pickup");
+        }
+      } catch (error) {
+        console.error("Error mengambil data pickup:", error);
+      }
+    };
+
+    fetchPickupData();
+  }, []);
 
   const getCookie = (name) => {
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
@@ -257,7 +178,9 @@ const FormPenyetoran = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Data yang akan dikirim:", { totalPrice, bank, rekening, alamatPickup, nohpPickup, pickup });
+    const status = "pending"; // Set default status to pending
+
+    console.log("Data yang akan dikirim:", { totalPrice, bank, rekening, alamatPickup, nohpPickup, pickup, status });
 
     setSubmitting(true);
     setSubmitError("");
@@ -269,7 +192,7 @@ const FormPenyetoran = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ totalPrice, bank, rekening, alamatPickup, nohpPickup, pickup }),
+        body: JSON.stringify({ totalPrice, bank, rekening, alamatPickup, nohpPickup, pickup, status }),
       });
       if (!response.ok) {
         const errorData = await response.json();
@@ -283,6 +206,11 @@ const FormPenyetoran = () => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const formatDate = (dateString) => {
+    const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+    return new Date(dateString).toLocaleDateString("id-ID", options);
   };
 
   return (
@@ -341,6 +269,35 @@ const FormPenyetoran = () => {
               {submitSuccess && <p className="success-message">Form berhasil dikirim</p>}
             </form>
           </CardContent>
+        </Card>
+        <Card className="pickup-card shadow-lg">
+          <Table>
+            <TableCaption>Data Pickup Anda</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Tanggal</TableHead>
+                <TableHead>Alamat</TableHead>
+                <TableHead>No. Handphone</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {pickupData.length > 0 ? (
+                pickupData.map((pickup) => (
+                  <TableRow key={pickup._id}>
+                    <TableCell>{formatDate(pickup.createdAt)}</TableCell>
+                    <TableCell>{pickup.address}</TableCell>
+                    <TableCell>{pickup.phone}</TableCell>
+                    <TableCell>{pickup.status || "Pending"}</TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan="4">Tidak ada data pickup</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
         </Card>
       </div>
     </>
