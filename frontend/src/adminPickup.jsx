@@ -36,9 +36,6 @@ const PickupMain = () => {
   const fetchPickupData = async () => {
     try {
       const token = getCookie("token");
-      console.log("Token:", token); // Tambahkan log untuk memastikan token disertakan
-      if (!token) throw new Error("Token tidak tersedia");
-
       const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/pickups", {
         method: "GET",
         headers: {
@@ -59,7 +56,6 @@ const PickupMain = () => {
   const fetchUserData = async () => {
     try {
       const token = getCookie("token");
-      console.log("Token:", token); // Tambahkan log untuk memastikan token disertakan
       const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/users", {
         method: "GET",
         headers: {
@@ -102,7 +98,6 @@ const PickupMain = () => {
 
   const getCookie = (name) => {
     const cookieValue = document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)");
-    console.log("Cookie Value:", cookieValue); // Tambahkan log untuk memastikan cookie diambil dengan benar
     return cookieValue ? cookieValue.pop() : "";
   };
 
