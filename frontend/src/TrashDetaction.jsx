@@ -1,7 +1,7 @@
 import Navbar from "./components/ui/Navbar";
 import { Card } from "./components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "./components/ui/button";
+import { Button } from "@/components/ui/button";
 import { useState, useRef, useEffect, useCallback } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
@@ -9,8 +9,9 @@ import Webcam from "react-webcam";
 import Loader from "./components/ui/loader";
 import ButtonHandler from "./components/ui/btn-handler";
 import { detect, detect2, detectVideo } from "./utils/detect";
-import "./TrashDetaction.css";
+import "./TrashDetection.css";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell, TableFooter } from "./components/ui/table";
+import { RiCameraSwitchFill } from "react-icons/ri"; // Import the icon
 
 const TrashDetection = () => {
   const [loading, setLoading] = useState({ loading: true, progress: 0 });
@@ -41,7 +42,6 @@ const TrashDetection = () => {
   useEffect(() => {
     tf.ready().then(async () => {
       await tf.ready();
-      // const modelUrl = `../best_web_model/model.json`;
       const modelUrl = `https://bank-sampah-bersinar.web.app/model.json`;
       const yolov8 = await tf.loadGraphModel(modelUrl);
       console.log(yolov8);
@@ -174,7 +174,7 @@ const TrashDetection = () => {
                   />
                   <Button className="bg-black text-white mt-3" onClick={handleCapture}>Scan</Button>
                   <Button className="bg-black text-white mt-3" onClick={toggleFacingMode}>
-                    {facingMode === "user" ? "Use Back Camera" : "Use Front Camera"}
+                    <RiCameraSwitchFill />
                   </Button>
                 </div>
               </>
