@@ -9,7 +9,7 @@ import Webcam from "react-webcam";
 import Loader from "./components/ui/loader";
 import ButtonHandler from "./components/ui/btn-handler";
 import { detect, detect2, detectVideo } from "./utils/detect";
-import "./TrashDetection.css";
+import "./TrashDetaction.css";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell, TableFooter } from "./components/ui/table";
 import { RiCameraSwitchFill } from "react-icons/ri"; // Import the icon
 
