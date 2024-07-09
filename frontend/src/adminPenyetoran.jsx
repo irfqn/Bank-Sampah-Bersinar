@@ -1,126 +1,3 @@
-// import Sidebar from "./components/ui/sidebar"
-// import { Card } from "./components/ui/card"
-// // import { RequestTable } from "./components/ui/requestTable"
-// import {
-//     Table,
-//     TableBody,
-//     TableCaption,
-//     TableCell,
-//     TableHead,
-//     TableHeader,
-//     TableRow,
-//     TableFooter
-//   } from "@/components/ui/table"
-// // import { Button } from "./button"
-// import { Button } from "./components/ui/button"
-// import "./adminPenyetoran.css"
-
-// const request = [
-//     {
-//         id:1,
-//         name: "John Doe",
-//         noRekening: 1234567890,
-//         nik: "1234567890123456",
-//         nominal: 100.000,
-//     },
-//     {
-//         id:2,
-//         name: "John Doe",
-//         noRekening: 1234567890,
-//         nik: "1234567890123456",
-//         nominal: 100.000,
-//     },
-//     {
-//         id:3,
-//         name: "John Doe",
-//         noRekening: 1234567890,
-//         nik: "1234567890123456",
-//         nominal: 100.000,
-//     },
-//     {
-//         id:4,
-//         name: "John Doe",
-//         noRekening: 1234567890,
-//         nik: "1234567890123456",
-//         nominal: 100.000,
-//     },
-//     {
-//         id:5,
-//         name: "John Doe",
-//         noRekening: 1234567890,
-//         nik: "1234567890123456",
-//         nominal: 100.000,
-//     },
-//     {
-//         id:6,
-//         name: "John Doe",
-//         noRekening: 1234567890,
-//         nik: "1234567890123456",
-//         nominal: 100.000,
-//     },
-//   ]
-
-// const AdminPenyetoran=()=>{
-//     return(
-//         <div className="flex">
-//             <Sidebar/>
-//             <PenyetoranMain/>
-//         </div>
-//     )
-// }
-
-// const PenyetoranMain=()=>{
-//     return(
-//         <div className="h-screen flex-1 p-7 penyetoran-main-page" style={{ backgroundColor: "#FFFFFF" }}>
-//             <h1 className="text-2xl font-semibold ">Penyetoran Nasabah</h1>
-//             <main className="penyetoran-container">
-//                     <Card className="penyetoran-card">
-//                         <RequestTable/>
-//                     </Card>
-//             </main>
-//         </div>
-//     )
-// }
-
-// const RequestTable=()=>{
-//     return (
-//         <Table>
-//             <TableCaption>A list of request.</TableCaption>
-//             <TableHeader>
-//                 <TableRow>
-//                     <TableHead>Name</TableHead>
-//                     <TableHead>No Rekening</TableHead>
-//                     <TableHead>NIK</TableHead>
-//                     <TableHead>Nominal</TableHead>
-//                     <TableHead>Aksi</TableHead>
-//                 </TableRow>
-//             </TableHeader>
-//             <TableBody>
-//                 {request.map((request) => (
-//                     <TableRow key={request.id}>
-//                         <TableCell className="font-medium">{request.name}</TableCell>
-//                         <TableCell>{request.noRekening}</TableCell>
-//                         <TableCell>{request.nik}</TableCell>
-//                         <TableCell>{request.nominal}</TableCell>
-//                         <TableCell>
-//                             <Button style={{ backgroundColor: 'green', marginRight: '5px' , color:"white"}}>Terima</Button> {/* Tombol 'Ya' */}
-//                             <Button style={{ backgroundColor:"red" , color:"white"}}>Tolak</Button> {/* Tombol 'Tidak' */}
-//                         </TableCell>
-//                     </TableRow>
-//                 ))}
-//             </TableBody>
-//             <TableFooter>
-//                 <TableRow>
-//                     <TableCell colSpan={3}>Total dana sekarang</TableCell>
-//                     <TableCell className="text-right">Rp 1.000.000</TableCell>
-//                 </TableRow>
-//             </TableFooter>
-//         </Table>
-//     )
-// }
-
-// export default AdminPenyetoran
-
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import Sidebar from "./components/ui/sidebar";
@@ -168,7 +45,7 @@ const RequestTable = () => {
 
     const fetchFormData = async () => {
         try {
-            const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/getAllForms');
+            const response = await fetch('http://localhost:3000/api/user/getAllForms');
             if (!response.ok) {
                 throw new Error('Failed to fetch form data');
             }
@@ -181,7 +58,7 @@ const RequestTable = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/users');
+            const response = await fetch('http://localhost:3000/api/user/users');
             if (!response.ok) {
                 throw new Error('Failed to fetch user data');
             }
@@ -220,9 +97,14 @@ const RequestTable = () => {
         }));
     };
 
+    const getCookie = (name) => {
+        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return cookieValue ? cookieValue.pop() : '';
+    };
+
     const handleSubmit = async (id) => {
         const data = formData.find((form) => form._id === id);
-        console.log(data)
+        console.log(data);
         const action = actionValues[id]; // Ambil nilai dropdown untuk baris dengan ID tertentu
 
         // Masukkan nilai dropdown ke dalam data yang akan dikirim
@@ -231,9 +113,9 @@ const RequestTable = () => {
             action: action
         };
 
-        console.log(postData)
+        console.log(postData);
 
-        const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/status', {
+        const response = await fetch('http://localhost:3000/api/user/status', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -243,6 +125,27 @@ const RequestTable = () => {
 
         if (response.ok) {
             console.log('Transaction submitted successfully');
+            
+            // Reset trashClass array and totalHarga if status is "Transfered"
+            if (action === 'Transfered') {
+                const token = getCookie('token');
+                const resetResponse = await fetch(`http://localhost:3000/api/user/resetTrashClass/${data.userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!resetResponse.ok) {
+                    throw new Error('Failed to reset trashClass array and totalHarga');
+                } else {
+                    const resetData = await resetResponse.json();
+                    console.log(resetData.message);
+                    // Optionally, you may want to refresh the data here
+                    mergeData();
+                }
+            }
         } else {
             console.error('Failed to submit transaction');
         }

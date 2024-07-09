@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import Navbar from "./components/ui/Navbar";
 import { Card } from "./components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button } from "./components/ui/button";
 import { useState, useRef, useEffect, useCallback } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
@@ -11,7 +13,12 @@ import ButtonHandler from "./components/ui/btn-handler";
 import { detect, detect2, detectVideo } from "./utils/detect";
 import "./TrashDetaction.css";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell, TableFooter } from "./components/ui/table";
-import { RiCameraSwitchFill } from "react-icons/ri"; // Import the icon
+
+const videoConstraints = {
+  width: 1280,
+  height: 720,
+  facingMode: "user"
+};
 
 const TrashDetection = () => {
   const [loading, setLoading] = useState({ loading: true, progress: 0 });
@@ -23,7 +30,6 @@ const TrashDetection = () => {
   const [detectedScores, setDetectedScores] = useState([]);
   const [isScanCompleted, setIsScanCompleted] = useState(false);
   const [prices, setPrices] = useState([]);
-  const [facingMode, setFacingMode] = useState("user");
 
   const webcamRef = useRef(null);
   const imageRef = useRef(null);
@@ -31,17 +37,12 @@ const TrashDetection = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const videoConstraints = {
-    width: 1280,
-    height: 720,
-    facingMode: facingMode // Dynamically set facingMode
-  };
-
   const modelName = "best";
 
   useEffect(() => {
     tf.ready().then(async () => {
       await tf.ready();
+      // const modelUrl = `../best_web_model/model.json`;
       const modelUrl = `https://bank-sampah-bersinar.web.app/model.json`;
       const yolov8 = await tf.loadGraphModel(modelUrl);
       console.log(yolov8);
@@ -65,7 +66,7 @@ const TrashDetection = () => {
       try {
         const currentDate = new Date();
         const currentMonth = currentDate.toISOString().slice(0, 7);
-        const response = await fetch(`https://bank-sampah-bersinar-2.onrender.com/api/user/getPrice?month=${currentMonth}`);
+        const response = await fetch(`http://localhost:3000/api/user/getPrice?month=${currentMonth}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data prices");
         }
@@ -135,10 +136,6 @@ const TrashDetection = () => {
     setDetectedScores((prevScores) => prevScores.filter((_, i) => i !== index));
   };
 
-  const toggleFacingMode = () => {
-    setFacingMode((prevMode) => (prevMode === "user" ? { exact: "environment" } : "user"));
-  };
-
   return (
     <>
       <Navbar />
@@ -173,9 +170,6 @@ const TrashDetection = () => {
                     style={{ marginTop: '10px' }}
                   />
                   <Button className="bg-black text-white mt-3" onClick={handleCapture}>Scan</Button>
-                  <Button className="bg-black text-white mt-3" onClick={toggleFacingMode}>
-                    <RiCameraSwitchFill />
-                  </Button>
                 </div>
               </>
             ) : (
@@ -205,7 +199,7 @@ const getCookie = (name) => {
 const submitTotalHarga = async (totalHarga, detectedClasses) => {
   try {
     const token = getCookie("token");
-    const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/totalHarga", {
+    const response = await fetch("http://localhost:3000/api/user/totalHarga", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -304,3 +298,4 @@ const DetectionResult = ({ detectedClasses, detectedScores, prices, onDeleteClas
 };
 
 export default TrashDetection;
+

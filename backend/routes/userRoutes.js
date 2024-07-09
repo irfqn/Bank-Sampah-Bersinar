@@ -5,7 +5,7 @@ const { login, signup, profile, getAllUsers } = require("../controller/userContr
 const { pendataan, mitra, findMitraByName } = require("../controller/mitraController");
 const { harga, getPriceByMonth } = require("../controller/priceController");
 const { education, getAlleducation } = require("../controller/eduControlle");
-const { createTotalPrice, getTotalPrice } = require("../controller/totalController");
+const { createTotalPrice, getTotalPrice, resetTrashClassAndTotalHarga } = require("../controller/totalController");
 const { submitForm, getAllForms, getUserFormsAndPickups } = require("../controller/formController");
 const { createTransaction, getAllTransactions } = require("../controller/statusController");
 const { getAllPickups, updatePickupStatus } = require("../controller/pickupController");
@@ -36,6 +36,7 @@ router.get("/education", getAlleducation);
 // TOTAL HARGA API
 router.post("/totalHarga", verifyToken, createTotalPrice);
 router.get("/getTotalHarga", verifyToken, getTotalPrice);
+router.put("/resetTrashClass/:userId", verifyToken, resetTrashClassAndTotalHarga);
 
 // FORM API
 router.post("/submitForm", verifyToken, submitForm);
@@ -47,7 +48,7 @@ router.post("/status", createTransaction);
 router.get("/getStatus", verifyToken, getAllTransactions);
 
 // PICKUP API
-router.get("/pickups", getAllPickups);
-router.post("/updatePickupStatus/:id", updatePickupStatus);
+router.get("/pickups", verifyToken, getAllPickups);
+router.post("/updatePickupStatus/:id", verifyToken, updatePickupStatus);
 
 module.exports = router;

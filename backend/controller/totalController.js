@@ -1,5 +1,6 @@
 const TotalPrice = require("../model/totalModel");
 
+// Function to create total price entry
 exports.createTotalPrice = async (req, res) => {
     try {
         const { totalHarga, detectedClasses } = req.body;
@@ -20,8 +21,7 @@ exports.createTotalPrice = async (req, res) => {
     }
 };
 
-
-
+// Function to get total price entries for a user
 exports.getTotalPrice = async (req, res) => {
     try {
         const userId = req.user._id; // Dapatkan ID pengguna dari token otentikasi
@@ -34,6 +34,27 @@ exports.getTotalPrice = async (req, res) => {
 
         res.status(200).json(totalPrice);
     } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Function to reset trashClass array and totalHarga for a user
+exports.resetTrashClassAndTotalHarga = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        // Update all total price entries for the user, setting trashClass to empty and totalHarga to 0
+        const result = await TotalPrice.updateMany({ user: userId }, { $set: { trashClass: [], totalHarga: 0 } });
+
+        if (result.nModified > 0) {
+            console.log('Trash class and total price reset successfully');
+            res.status(200).json({ message: 'Trash class and total price reset successfully' });
+        } else {
+            console.log('No entries found to update');
+            res.status(404).json({ message: 'No entries found to update' });
+        }
+    } catch (error) {
+        console.error('Error resetting trash class and total price:', error);
         res.status(500).json({ error: error.message });
     }
 };
