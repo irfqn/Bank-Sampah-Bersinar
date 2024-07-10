@@ -11,38 +11,36 @@ const AdminEducation = () => {
     const [title, setTitle] = useState('');
     const [article, setArticle] = useState('');
 
-    
     function convertToBase64(file){
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);
             fileReader.onload = () => {
-                resolve(fileReader.result)
+                resolve(fileReader.result);
             };
             fileReader.onerror = (error) => {
-                reject(error)
+                reject(error);
             }
-        })
+        });
     }
 
     const handleFileUpload = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        console.log(base64)
-        setImage(base64)
+        setImage(base64);
     }
 
     const handleSubmit = async () => {
         try {
+            // Format content with <p> tags for paragraphs
+            const formattedArticle = article.split('\n').map(para => `<p>${para}</p>`).join('');
             const formData = {
                 picture: image,
                 title: title,
-                article: article
+                article: formattedArticle
             };
 
-            console.log(formData)
-
-            const response = await fetch("https://bank-sampah-bersinar-3.onrender.com/api/user/postEdu", {
+            const response = await fetch("http://localhost:3000/api/user/postEdu", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -70,7 +68,6 @@ const AdminEducation = () => {
         <div className="flex">
             <Sidebar />
             <EducationMain
-                // onChange={convertToBase64}
                 handleFileUpload={handleFileUpload}
                 image={image}
                 setTitle={setTitle}
@@ -84,7 +81,7 @@ const AdminEducation = () => {
 const EducationMain = ({ handleFileUpload, setTitle, setArticle, handleSubmit }) => {
     return (
         <div className="h-screen flex-1 p-7 education-main-page" style={{ backgroundColor: "#FFFFFF" }}>
-            <h1 className="text-2xl font-semibold ">Education Mitra</h1>
+            <h1 className="text-2xl font-semibold">Education Mitra</h1>
             <p style={{ marginBlock: "1rem" }}>Masukan data mitra disini!</p>
             <main className="education-container">
                 <div className="input-education">
@@ -92,7 +89,7 @@ const EducationMain = ({ handleFileUpload, setTitle, setArticle, handleSubmit })
                     <Input
                         type="file"
                         style={{ width: "300px" }}
-                        onChange={(e)=> handleFileUpload(e)}
+                        onChange={handleFileUpload}
                     />
                 </div>
                 <div className="input-education">

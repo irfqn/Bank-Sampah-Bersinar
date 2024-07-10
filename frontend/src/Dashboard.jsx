@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import './Dashboard.css';
-import { Button } from './components/ui/button';
+// import { Button } from './components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Navbar from './components/ui/Navbar';
@@ -19,7 +19,7 @@ export function CarouselDashboard({ education }) {
                   <div className='carousel-content-child'>
                     <h1 className="judul">{item.title}</h1>
                     <p className="article">{item.article}</p>
-                    <Button>Read More</Button>
+                    {/* <Button>Read More</Button> */}
                   </div>
                 </CardContent>
               </Card>
@@ -99,10 +99,10 @@ export default function Dashboard() {
     const token = getCookie("token");
 
     Promise.all([
-      fetchData("https://bank-sampah-bersinar-3.onrender.com/api/user/getTotalHarga", token).then(setTotalHarga),
-      fetchData("https://bank-sampah-bersinar-3.onrender.com/api/user/getStatus", token).then(setTransaction),
-      fetchData(`https://bank-sampah-bersinar-3.onrender.com/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
-      fetchData("https://bank-sampah-bersinar-3.onrender.com/api/user/education").then(data => setEducation(data.reverse())),
+      fetchData("http://localhost:3000/api/user/getTotalHarga", token).then(setTotalHarga),
+      fetchData("http://localhost:3000/api/user/getStatus", token).then(setTransaction),
+      fetchData(`http://localhost:3000/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
+      fetchData("http://localhost:3000/api/user/education").then(data => setEducation(data.reverse())),
     ]).catch(error => console.error("Error fetching data:", error));
 
     // Fetch predicted prices for next month
@@ -115,7 +115,7 @@ export default function Dashboard() {
         const promises = totalHarga.map(async transaksi => {
           return Promise.all(transaksi.trashClass.map(async trashClassItem => {
             const mappedTrashType = classMapping[trashClassItem] || trashClassItem;
-            const response = await fetch("https://bank-sampah-bersinar-1.onrender.com/api/predict", {
+            const response = await fetch("http://localhost:5000/api/predict", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

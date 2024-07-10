@@ -10,7 +10,7 @@ const ArticleDetail = ({ article }) => {
     <div className="article-detail">
       <img src={article.picture} alt={article.title} />
       <h2>{article.title}</h2>
-      <p>{article.article}</p>
+      <div dangerouslySetInnerHTML={{ __html: article.article }}></div>
     </div>
   );
 };
