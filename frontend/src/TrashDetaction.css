@@ -1,100 +1,158 @@
-.td-container{
-    padding-inline: 6rem;
-    padding-block: 2rem;
-    width: 100%;
-    /* height: 90.2vh; */
+/* Container Styles */
+.td-container {
+  padding-inline: 6rem;
+  padding-block: 2rem;
+  width: 100%;
 }
 
-.buttonH{
-    padding-inline: 6rem;
-    padding-block: 2rem;
+.buttonH {
+  padding-inline: 6rem;
+  padding-block: 2rem;
 }
 
-.title{
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 2rem;
+.title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
 }
 
-.description{
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    margin-bottom: 1rem;
+.description {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  margin-bottom: 1rem;
 }
 
-.scan-card{
-    display: flex;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 1rem;
+/* Card Styles */
+.scan-card {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
-.td-kiri{
-    width: 70%;
-    background-color: red;
-    flex-grow: 3;
+/* Left Section Styles */
+.td-left {
+  width: 70%;
+  flex-grow: 3;
 }
 
-.td-kanan{
-    width: 30%;
-    background-color: white;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
+/* Right Section Styles */
+.td-right {
+  width: 30%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 1rem;
 }
 
-.input{
-    background-color: white;
+/* Input Styles */
+.input {
+  background-color: white;
 }
 
 .td-content > img {
-    display: none;
-    width: 100%;
-    max-width: 720px;
-    max-height: 500px;
-    border-radius: 10px;
-  }
-  
-  .td-content > video {
-    display: none;
-    width: 100%;
-    max-width: 720px;
-    max-height: 500px;
-    border-radius: 10px;
-  }
-  
-  .td-content {
-    position: relative;
-  }
-  
-  .td-content > canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .buttontd {
-    text-decoration: none;
-    color: white;
-    background-color: black;
-    border: 2px solid black;
-    margin: 0 5px;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .buttontd:hover {
-    color: black;
-    background-color: white;
-    border: 2px solid black;
+  display: none;
+  width: 100%;
+  max-width: 720px;
+  max-height: 500px;
+  border-radius: 10px;
+}
+
+.td-content > video {
+  display: none;
+  width: 100%;
+  max-width: 720px;
+  max-height: 500px;
+  border-radius: 10px;
+}
+
+.td-content {
+  position: relative;
+}
+
+.td-content > canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Button Styles */
+.buttontd {
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttontd:hover {
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.buttonSubmit {
+  background-color: black;
+  color: white;
+}
+
+/* Responsive Design for Tablets */
+@media (max-width: 1024px) {
+  .td-container {
+      padding-inline: 3rem;
   }
 
-  .buttonSubmit{
-    background-color: black;
-    color: white;
+  .scan-card {
+      flex-direction: column;
   }
-  
+
+  .td-left, .td-right {
+      width: 100%;
+  }
+
+  .td-left {
+      margin-bottom: 1rem;
+  }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .td-container {
+      padding-inline: 1rem;
+      padding-block: 1rem;
+  }
+
+  .title {
+      font-size: 1.5rem;
+  }
+
+  .scan-card {
+      padding: 0.5rem;
+  }
+
+  .buttonH {
+      padding-inline: 2rem;
+      padding-block: 1rem;
+  }
+
+  .buttontd {
+      margin: 5px 0;
+      padding: 5px 10px;
+  }
+
+  .td-left, .td-right {
+      width: 100%;
+  }
+
+  .td-left {
+      margin-bottom: 1rem;
+  }
+}
