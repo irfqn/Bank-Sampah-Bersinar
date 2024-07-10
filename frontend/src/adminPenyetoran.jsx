@@ -45,7 +45,7 @@ const RequestTable = () => {
 
     const fetchFormData = async () => {
         try {
-            const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/getAllForms');
+            const response = await fetch('https://bank-sampah-bersinar-3.onrender.com/api/user/getAllForms');
             if (!response.ok) {
                 throw new Error('Failed to fetch form data');
             }
@@ -58,7 +58,7 @@ const RequestTable = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/users');
+            const response = await fetch('https://bank-sampah-bersinar-3.onrender.com/api/user/users');
             if (!response.ok) {
                 throw new Error('Failed to fetch user data');
             }
@@ -115,7 +115,7 @@ const RequestTable = () => {
 
         console.log(postData);
 
-        const response = await fetch('https://bank-sampah-bersinar-2.onrender.com/api/user/status', {
+        const response = await fetch('https://bank-sampah-bersinar-3.onrender.com/api/user/status', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -129,7 +129,7 @@ const RequestTable = () => {
             // Reset trashClass array and totalHarga if status is "Transfered"
             if (action === 'Transfered') {
                 const token = getCookie('token');
-                const resetResponse = await fetch(`https://bank-sampah-bersinar-2.onrender.com/api/user/resetTrashClass/${data.userId}`, {
+                const resetResponse = await fetch(`https://bank-sampah-bersinar-3.onrender.com/api/user/resetTrashClass/${data.userId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

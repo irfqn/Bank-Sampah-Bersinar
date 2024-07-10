@@ -202,7 +202,7 @@ const AdminTPrice = () => {
 
         try {
             // Pengiriman permintaan ke server
-            const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/price", {
+            const response = await fetch("https://bank-sampah-bersinar-3.onrender.com/api/user/price", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

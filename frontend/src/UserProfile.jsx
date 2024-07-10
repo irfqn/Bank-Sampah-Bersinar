@@ -75,7 +75,7 @@ const UserProfile = () => {
       try {
         const token = getCookie("token"); // Mengambil token dari cookie
         console.log(token)
-        const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/profile", {
+        const response = await fetch("https://bank-sampah-bersinar-3.onrender.com/api/user/profile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

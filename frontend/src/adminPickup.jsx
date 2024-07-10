@@ -35,7 +35,7 @@ const PickupMain = () => {
 
   const fetchPickupData = async () => {
     try {
-      const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/pickups", {
+      const response = await fetch("https://bank-sampah-bersinar-3.onrender.com/api/user/pickups", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const PickupMain = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch("https://bank-sampah-bersinar-2.onrender.com/api/user/users", {
+      const response = await fetch("https://bank-sampah-bersinar-3.onrender.com/api/user/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const PickupMain = () => {
       status,
     };
 
-    const response = await fetch(`https://bank-sampah-bersinar-2.onrender.com/api/user/updatePickupStatus/${id}`, {
+    const response = await fetch(`https://bank-sampah-bersinar-3.onrender.com/api/user/updatePickupStatus/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

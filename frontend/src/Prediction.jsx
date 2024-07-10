@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/ui/Navbar";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./components/ui/card";
@@ -85,7 +86,7 @@ const Prediction = () => {
     const mappedTrashType = classMapping[trashType] || trashType;
     const currentMonth = new Date().toISOString().slice(0, 7); // Current month in format YYYY-MM
     try {
-      const response = await fetch(`https://bank-sampah-bersinar-2.onrender.com/api/user/getPrice?month=${currentMonth}`);
+      const response = await fetch(`https://bank-sampah-bersinar-3.onrender.com/api/user/getPrice?month=${currentMonth}`);
       const data = await response.json();
       if (response.ok) {
         const filteredData = data.find(item => item.trash === mappedTrashType);
