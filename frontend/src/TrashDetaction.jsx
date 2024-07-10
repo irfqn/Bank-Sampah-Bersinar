@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import Navbar from "./components/ui/Navbar";
-import { Card } from "./components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "./components/ui/button";
 import { useState, useRef, useEffect, useCallback } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
 import Webcam from "react-webcam";
+import { FaCamera } from "react-icons/fa"; // Import the camera icon
+import Navbar from "./components/ui/Navbar";
+import { Card } from "./components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Loader from "./components/ui/loader";
 import ButtonHandler from "./components/ui/btn-handler";
 import { detect, detect2, detectVideo } from "./utils/detect";
@@ -30,6 +31,7 @@ const TrashDetection = () => {
   const [detectedScores, setDetectedScores] = useState([]);
   const [isScanCompleted, setIsScanCompleted] = useState(false);
   const [prices, setPrices] = useState([]);
+  const [facingMode, setFacingMode] = useState("user"); // State for camera facing mode
 
   const webcamRef = useRef(null);
   const imageRef = useRef(null);
@@ -136,6 +138,10 @@ const TrashDetection = () => {
     setDetectedScores((prevScores) => prevScores.filter((_, i) => i !== index));
   };
 
+  const handleSwitchCamera = () => {
+    setFacingMode((prevFacingMode) => (prevFacingMode === "user" ? "environment" : "user"));
+  };
+
   return (
     <>
       <Navbar />
@@ -158,9 +164,12 @@ const TrashDetection = () => {
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
-                    videoConstraints={videoConstraints}
+                    videoConstraints={{ ...videoConstraints, facingMode }}
                   />
                   <img ref={imageRef} style={{ display: "none" }} alt="Uploaded" />
+                  <Button onClick={handleSwitchCamera} className="bg-black text-white mt-3">
+                    <FaCamera /> Switch Camera
+                  </Button>
                 </div>
                 <div className="td-right">
                   <Input
@@ -298,4 +307,3 @@ const DetectionResult = ({ detectedClasses, detectedScores, prices, onDeleteClas
 };
 
 export default TrashDetection;
-
