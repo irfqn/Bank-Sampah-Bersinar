@@ -1,99 +1,161 @@
-.form-content{
+/* Aturan dasar */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Gaya untuk form */
+.form-content {
     padding-inline: 6rem;
     padding-block: 2rem;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    /* column-gap: 5rem; */
 }
 
-.form-title{
-    font-family: "Poppins", sans-serif;
+.form-title {
     font-weight: 600;
     font-size: 2rem;
 }
 
-.form-description{
-    font-family: "Poppins", sans-serif;
+.form-description {
     font-weight: 400;
 }
 
-.form{
+.form {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
 }
 
-.card-title{
-    font-family: "Poppins", sans-serif;
+.card-title {
     font-weight: 600;
     font-size: 1.5rem;
 }
 
-.card-description{
-    font-family: "Poppins", sans-serif;
+.card-description {
     font-weight: 500;
     margin-top: -0.3rem;
     font-size: 0.8rem;
     opacity: 0.8;
 }
 
-.form-data{
+.form-data {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     column-gap: 3rem;
 }
 
-.each-data p{
-    font-family: "Poppins", sans-serif;
+.each-data p,
+.bank p,
+.rekening p {
     font-weight: 400;
     margin-top: -0.3rem;
     font-size: 1rem;
-    /* opacity: 0.8; */
 }
 
-.each-data h1{
-    font-family: "Poppins", sans-serif;
+.each-data h1 {
     font-weight: 600;
     font-size: 1.5rem;
 }
 
-.bank p{
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    margin-top: -0.3rem;
-    font-size: 1rem;
-}
-
-.form-card-content{
+.form-card-content {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
 }
 
-.rekening p{
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-}
-
-.form Input{
+.form Input {
     width: 20rem;
 }
 
-.form-button{
+.form-button {
     background-color: #206a4a;
     color: white;
     width: 7rem;
 }
 
-.pick-up{
+.pick-up {
     display: flex;
     align-items: center;
 }
 
-.pick-up-label{
+.pick-up-label {
     margin-left: 10px;
+}
+
+/* Media queries untuk tablet */
+@media (max-width: 768px) {
+    .form-content {
+        padding-inline: 2rem;
+        padding-block: 1rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .form-data {
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+
+    .form Input {
+        width: 100%;
+    }
+
+    .form-button {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Media queries untuk mobile */
+@media (max-width: 480px) {
+    .form-content {
+        padding-inline: 1rem;
+        padding-block: 0.5rem;
+    }
+
+    .form-title {
+        font-size: 1.2rem;
+    }
+
+    .form-description {
+        font-size: 0.9rem;
+    }
+
+    .each-data p,
+    .bank p,
+    .rekening p {
+        font-size: 0.9rem;
+    }
+
+    .each-data h1 {
+        font-size: 1.2rem;
+    }
+
+    .form Input {
+        width: 100%;
+    }
+
+    .form-button {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .pick-up-label {
+        font-size: 0.9rem;
+    }
 }
