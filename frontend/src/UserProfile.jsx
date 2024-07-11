@@ -158,7 +158,7 @@ const UserProfile = () => {
                   <h1 className="data address">{userData.address}</h1>
                 </div>
               </div>
-              <Button className="edit-profile">Edit Profile</Button>
+              {/* <Button className="edit-profile">Edit Profile</Button> */}
               <Button className="sign-out">Sign Out</Button>
             </Card>
           ) : (
