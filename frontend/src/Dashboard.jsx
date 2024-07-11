@@ -115,7 +115,7 @@ export default function Dashboard() {
         const promises = totalHarga.map(async transaksi => {
           return Promise.all(transaksi.trashClass.map(async trashClassItem => {
             const mappedTrashType = classMapping[trashClassItem] || trashClassItem;
-            const response = await fetch("http://localhost:5000/api/predict", {
+            const response = await fetch("https://bank-sampah-bersinar-1.onrender.com/api/predict", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
