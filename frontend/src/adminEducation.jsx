@@ -40,7 +40,7 @@ const AdminEducation = () => {
                 article: formattedArticle
             };
 
-            const response = await fetch("http://localhost:3000/api/user/postEdu", {
+            const response = await fetch("https://bank-sampah-bersinar-3.onrender.com/api/user/postEdu", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
