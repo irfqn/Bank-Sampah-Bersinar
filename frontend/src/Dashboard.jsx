@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+// Dashboard page
 import './Dashboard.css';
 // import { Button } from './components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './components/ui/card';
