@@ -46,8 +46,11 @@ jobs:
         with:
           name: node-app
 
-      - name: Extract artifact
-        run: unzip node-app.zip -d node-app
+      - name: List downloaded files
+        run: ls -R
+
+      - name: Move to backend folder
+        run: mv node-app/backend/* .
 
       - name: Login to Azure
         uses: azure/login@v1
@@ -62,4 +65,4 @@ jobs:
         with:
           app-name: "Bank-Sampah-Bersinar"
           slot-name: "Production"
-          package: node-app/backend
+          package: .
