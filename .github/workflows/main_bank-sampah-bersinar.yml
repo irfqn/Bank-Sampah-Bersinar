@@ -62,9 +62,12 @@ jobs:
         with:
           name: frontend
 
+      - name: Ensure backend/public directory exists
+        run: mkdir -p backend/public
+
       - name: Copy frontend build to backend
         run: |
-          cp -a frontend/* backend/public/
+          cp -a frontend/dist/. backend/public/
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
