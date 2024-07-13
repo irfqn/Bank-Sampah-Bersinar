@@ -23,6 +23,10 @@ jobs:
           cd backend
           npm install
 
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
       - name: Install and build frontend
         run: |
           cd frontend
