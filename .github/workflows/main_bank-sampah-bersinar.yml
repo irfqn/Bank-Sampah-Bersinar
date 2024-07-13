@@ -57,12 +57,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: frontend
-          path: frontend/build
+          path: frontend
 
       - name: Copy frontend build to backend
         run: |
           mkdir -p backend/frontend/build
-          cp -a frontend/build/. backend/frontend/build/
+          cp -a frontend/. backend/frontend/build/
 
       - name: Login to Azure
         uses: azure/login@v1
