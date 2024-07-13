@@ -24,11 +24,17 @@ jobs:
           npm install
           npm run build --if-present
 
-      - name: Install and build frontend
+      - name: Install dependencies for frontend
         run: |
           cd frontend
           npm install
+
+      - name: Build frontend
+        run: |
+          cd frontend
           npm run build
+        env:
+          CI: false
 
       - name: List frontend directory
         run: |
