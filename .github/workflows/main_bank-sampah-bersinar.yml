@@ -30,6 +30,11 @@ jobs:
           npm install
           npm run build
 
+      - name: List frontend build directory
+        run: |
+          cd frontend/build
+          ls -al
+
       - name: Upload backend artifact
         uses: actions/upload-artifact@v2
         with:
@@ -58,6 +63,10 @@ jobs:
         with:
           name: frontend
           path: frontend
+
+      - name: List downloaded frontend artifact
+        run: |
+          ls -al frontend
 
       - name: Copy frontend build to backend
         run: |
