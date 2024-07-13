@@ -40,6 +40,11 @@ jobs:
         env:
           CI: false
 
+      - name: Output frontend build logs
+        run: |
+          cd frontend
+          npm run build --verbose
+
       - name: List frontend directory
         run: |
           cd frontend
