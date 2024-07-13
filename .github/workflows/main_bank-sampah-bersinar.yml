@@ -30,6 +30,11 @@ jobs:
           npm install
           npm run build
 
+      - name: List frontend directory
+        run: |
+          cd frontend
+          ls -al
+
       - name: List frontend build directory
         run: |
           cd frontend/build
