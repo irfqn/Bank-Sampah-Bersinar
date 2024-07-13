@@ -1,4 +1,4 @@
-name: Build and deploy Node.js and React app to Azure Web App - Bank-Sampah-Bersinar
+name: Build and deploy Node.js app to Azure Web App - Bank-Sampah-Bersinar
 
 on:
   push:
@@ -11,67 +11,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
         with:
-          node-version: "18"
-
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
-
-      - name: Clean backend node_modules and lock files
-        run: |
-          cd backend
-          rm -rf node_modules package-lock.json yarn.lock
+          node-version: "18.x"
 
       - name: Install and build backend
         run: |
           cd backend
           npm install
-          npm run build --if-present
+          npm run build
 
-      - name: Clean frontend node_modules and lock files
-        run: |
-          cd frontend
-          rm -rf node_modules package-lock.json yarn.lock
-
-      - name: Install dependencies for frontend
+      - name: Install and build frontend
         run: |
           cd frontend
           pnpm install
-
-      - name: Verify frontend package.json
-        run: |
-          cat frontend/package.json
-
-      - name: Build frontend
-        run: |
-          cd frontend
           pnpm run build
-        env:
-          CI: false
-
-      - name: List frontend directory
-        run: |
-          cd frontend
-          ls -al
-
-      - name: List frontend dist directory
-        run: |
-          cd frontend/dist
-          ls -al
 
       - name: Upload backend artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: backend
-          path: backend/
+          path: |
+            backend/
+            backend/web.config
 
       - name: Upload frontend artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: frontend
           path: frontend/dist/
@@ -82,34 +50,22 @@ jobs:
 
     steps:
       - name: Download backend artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: backend
-          path: backend
 
       - name: Download frontend artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: frontend
-          path: frontend
-
-      - name: List downloaded frontend artifact
-        run: |
-          ls -al frontend
 
       - name: Copy frontend build to backend
         run: |
-          mkdir -p backend/frontend/build
-          cp -a frontend/. backend/frontend/build/
-
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cp -a frontend/* backend/public/
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: "Bank-Sampah-Bersinar"
           slot-name: "Production"
-          package: backend
+          package: backend/
