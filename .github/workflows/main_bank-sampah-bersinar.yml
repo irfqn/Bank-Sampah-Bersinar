@@ -36,6 +36,10 @@ jobs:
         with:
           name: backend
           path: backend/
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Azure Web App Deploy
         uses: azure/webapps-deploy@v2
         with:
