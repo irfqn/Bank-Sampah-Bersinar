@@ -278,7 +278,7 @@ const Register2 = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://bank-sampah-bersinar-3.onrender.com/api/user/signup", {
+      const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
