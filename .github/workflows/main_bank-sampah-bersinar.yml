@@ -33,6 +33,10 @@ jobs:
           pnpm install
           pnpm run build
 
+      - name: List frontend build directory
+        run: |
+          ls -al frontend/dist
+
       - name: Upload backend artifact
         uses: actions/upload-artifact@v3
         with:
