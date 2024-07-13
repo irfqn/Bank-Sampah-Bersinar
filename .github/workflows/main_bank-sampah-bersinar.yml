@@ -29,6 +29,10 @@ jobs:
           cd frontend
           npm install
 
+      - name: Verify frontend package.json
+        run: |
+          cat frontend/package.json
+
       - name: Build frontend
         run: |
           cd frontend
@@ -41,9 +45,9 @@ jobs:
           cd frontend
           ls -al
 
-      - name: List frontend build directory
+      - name: List frontend dist directory
         run: |
-          cd frontend/build
+          cd frontend/dist
           ls -al
 
       - name: Upload backend artifact
@@ -56,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: frontend
-          path: frontend/build/
+          path: frontend/dist/
 
   deploy:
     runs-on: ubuntu-latest
