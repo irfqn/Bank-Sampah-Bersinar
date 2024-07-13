@@ -40,7 +40,7 @@ router.put("/resetTrashClass/:userId", verifyToken, resetTrashClassAndTotalHarga
 
 // FORM API
 router.post("/submitForm", verifyToken, submitForm);
-router.get("/getAllForms", getAllForms);
+router.get("/getAllForms", getAllForms);  // <-- Pastikan rute ini ada dan benar
 router.get("/userFormsAndPickups", verifyToken, getUserFormsAndPickups);
 
 // STATUS API

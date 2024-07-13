@@ -3,8 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
-const cors = require('cors');
-
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,7 +25,11 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("Error connecting to MongoDB:", error));
 
-app.use("/api/user", userRoutes);
+// Base path for all routes
+const basePath = "/api";
+
+// Attach userRoutes to base path
+app.use(`${basePath}/user`, userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
