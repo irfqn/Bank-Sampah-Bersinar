@@ -47,13 +47,17 @@ jobs:
           name: node-app
 
       - name: List downloaded files
-        run: ls -R
+        run: |
+          echo "Listing files in current directory"
+          ls -R
 
       - name: Ensure backend directory exists
-        run: if [ -d "node-app/backend" ]; then echo "Backend directory exists"; else echo "Backend directory does not exist"; fi
+        run: |
+          if [ -d "node-app/backend" ]; then echo "Backend directory exists"; else echo "Backend directory does not exist"; fi
 
-      - name: Move to backend folder
-        run: mv node-app/backend/* .
+      - name: Move backend files to root
+        run: |
+          if [ -d "node-app/backend" ]; then mv node-app/backend/* .; else echo "Backend directory not found"; fi
 
       - name: Login to Azure
         uses: azure/login@v1
