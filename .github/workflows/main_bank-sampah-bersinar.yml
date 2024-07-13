@@ -18,11 +18,10 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: Install and build backend
+      - name: Install backend dependencies
         run: |
           cd backend
           npm install
-          npm run build
 
       - name: Install and build frontend
         run: |
