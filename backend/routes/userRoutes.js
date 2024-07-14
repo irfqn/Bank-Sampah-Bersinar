@@ -40,15 +40,15 @@ router.put("/resetTrashClass/:userId", verifyToken, resetTrashClassAndTotalHarga
 
 // FORM API
 router.post("/submitForm", verifyToken, submitForm);
-router.get("/getAllForms", getAllForms);  // <-- Pastikan rute ini ada dan benar
+router.get("/getAllForms", getAllForms);
 router.get("/userFormsAndPickups", verifyToken, getUserFormsAndPickups);
 
 // STATUS API
 router.post("/status", createTransaction);
-router.get("/getStatus", verifyToken, getAllTransactions);
+router.get("/getStatus", getAllTransactions); // Tidak perlu token
 
 // PICKUP API
-router.get("/pickups", getAllPickups);
-router.post("/updatePickupStatus/:id", updatePickupStatus);
+router.get("/pickups", verifyToken, getAllPickups);
+router.post("/updatePickupStatus/:id", verifyToken, updatePickupStatus);
 
 module.exports = router;

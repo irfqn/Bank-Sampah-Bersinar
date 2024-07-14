@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Sidebar from "./components/ui/sidebar";
 import { Card } from "./components/ui/card";
@@ -37,7 +37,7 @@ const PenyetoranMain = () => {
 
 const RequestTable = () => {
     const [formData, setFormData] = useState([]);
-    const [actionValues, setActionValues] = useState({}); // State untuk menyimpan nilai dropdown untuk setiap baris
+    const [actionValues, setActionValues] = useState({});
 
     useEffect(() => {
         mergeData();
@@ -49,7 +49,9 @@ const RequestTable = () => {
             if (!response.ok) {
                 throw new Error('Failed to fetch form data');
             }
-            return await response.json();
+            const data = await response.json();
+            console.log("Form Data:", data);  // Log response data
+            return data;
         } catch (error) {
             console.error('Error fetching form data:', error);
             throw error;
@@ -62,7 +64,9 @@ const RequestTable = () => {
             if (!response.ok) {
                 throw new Error('Failed to fetch user data');
             }
-            return await response.json();
+            const data = await response.json();
+            console.log("User Data:", data);  // Log response data
+            return data;
         } catch (error) {
             console.error('Error fetching user data:', error);
             throw error;
@@ -84,6 +88,7 @@ const RequestTable = () => {
                 };
             });
 
+            console.log("Merged Data:", mergedData);  // Log merged data
             setFormData(mergedData);
         } catch (error) {
             console.error('Error merging data:', error);
@@ -93,7 +98,7 @@ const RequestTable = () => {
     const handleActionChange = (id, value) => {
         setActionValues(prevState => ({
             ...prevState,
-            [id]: value // Simpan nilai dropdown untuk baris dengan ID tertentu
+            [id]: value
         }));
     };
 
@@ -104,16 +109,12 @@ const RequestTable = () => {
 
     const handleSubmit = async (id) => {
         const data = formData.find((form) => form._id === id);
-        console.log(data);
-        const action = actionValues[id]; // Ambil nilai dropdown untuk baris dengan ID tertentu
+        const action = actionValues[id];
 
-        // Masukkan nilai dropdown ke dalam data yang akan dikirim
         const postData = {
             ...data,
             action: action
         };
-
-        console.log(postData);
 
         const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/status', {
             method: 'POST',
@@ -126,7 +127,6 @@ const RequestTable = () => {
         if (response.ok) {
             console.log('Transaction submitted successfully');
             
-            // Reset trashClass array and totalHarga if status is "Transfered"
             if (action === 'Transfered') {
                 const token = getCookie('token');
                 const resetResponse = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`, {
@@ -142,7 +142,6 @@ const RequestTable = () => {
                 } else {
                     const resetData = await resetResponse.json();
                     console.log(resetData.message);
-                    // Optionally, you may want to refresh the data here
                     mergeData();
                 }
             }
@@ -165,7 +164,7 @@ const RequestTable = () => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {formData.map((data) => (
+                {formData.length > 0 ? formData.map((data) => (
                     <TableRow key={data._id}>
                         <TableCell className="font-medium">{data.firstName} {data.lastName}</TableCell>
                         <TableCell>{data.rekening}</TableCell>
@@ -183,7 +182,7 @@ const RequestTable = () => {
                             <button className="submit-button" onClick={() => handleSubmit(data._id)}>Submit</button>
                         </TableCell>
                     </TableRow>
-                ))}
+                )) : <TableRow><TableCell colSpan="6">No data available</TableCell></TableRow>}
             </TableBody>
         </Table>
     );

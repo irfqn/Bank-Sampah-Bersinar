@@ -22,6 +22,7 @@ import AdminTrashDetaction from "./adminTrashDetaction.jsx";
 import AdminEducation from "./adminEducation.jsx";
 import AdminTPrice from "./adminTrashPrice.jsx";
 import AdminPickup from "./adminPickup.jsx";
+import AdminHasil from "./adminHasil.jsx";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/pickup",
     element: <AdminPickup/>,
+  },
+  {
+    path: "/admin/hasil",
+    element: <AdminHasil/>,
   },
 ]);
 

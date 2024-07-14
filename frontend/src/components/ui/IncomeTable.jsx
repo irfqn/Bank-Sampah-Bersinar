@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import {
     Table,
     TableBody,
@@ -6,144 +8,104 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
+    TableFooter,
+} from "@/components/ui/table";
 
-const income = [
-    {
-        id:"1",
-        nama: "budi",
-        tanggal: "2024-03-15",
-        bank: "Credit Card",
-        rekening: "121212", // Tidak ada nomor rekening karena pembayaran dilakukan dengan kartu kredit
-        status: "sudah", // Karena status pembayaran adalah "Paid"
-        kunjungan: 1, // Satu pengunjung datang untuk pembayaran ini
-    },
-    {
-        id:"2",
-        nama: "zahwan",
-        tanggal: "2024-03-20",
-        bank: "PayPal",
-        rekening: "21212121", // Tidak ada nomor rekening karena pembayaran dilakukan melalui PayPal
-        status: "belum", // Karena status pembayaran adalah "Pending"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    {
-        id:"3",
-        nama: "tama",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        kunjungan: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    // Lanjutkan untuk semua objek di array 'nasabahs'
-];
+const IncomeTable = () => {
+    const [data, setData] = useState([]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/getStatus');
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
+        fetchData();
+    }, []);
 
-  
-const IncomeTable=()=> {
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
+    const getStatusBadge = (status) => {
+        let badgeClass = '';
+        let badgeText = '';
+
+        switch (status.toLowerCase()) {
+            case 'transfered':
+                badgeClass = 'badge badge-green';
+                badgeText = 'Transferred';
+                break;
+            case 'proses':
+                badgeClass = 'badge badge-yellow';
+                badgeText = 'Proses';
+                break;
+            case 'reject':
+                badgeClass = 'badge badge-red';
+                badgeText = 'Reject';
+                break;
+            default:
+                badgeClass = 'badge badge-gray';
+                badgeText = status;
+        }
+
+        return (
+            <span className={badgeClass}>
+                {badgeText}
+            </span>
+        );
+    };
+
+    // Filter data yang berstatus 'transfered' dan hitung total nominalnya
+    const totalTransfered = data
+        .filter(item => item.action && item.action.toLowerCase() === 'transfered')
+        .reduce((total, item) => {
+            const nominalValue = parseFloat(item.totalPrice.replace(/[^0-9,-]+/g,"").replace(",", "."));
+            return total + nominalValue;
+        }, 0);
+
     return (
-      <Table>
-        <TableCaption>List of customer deposits</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="">nasabah</TableHead>
-            <TableHead>tanggal</TableHead>
-            <TableHead>bank</TableHead>
-            {/* <TableHead className="text-right">Amount</TableHead> */}
-            <TableHead>rekening</TableHead>
-            <TableHead>status</TableHead>
-            <TableHead>kunjungan</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {income.map((nasabah) => (
-            <TableRow key={nasabah.id}>
-              <TableCell className="font-medium">{nasabah.nama}</TableCell>
-              <TableCell>{nasabah.tanggal}</TableCell>
-              <TableCell>{nasabah.bank}</TableCell>
-              {/* <TableCell className="text-right">{nasabah.totalAmount}</TableCell> */}
-              <TableCell>{nasabah.rekening}</TableCell>
-              <TableCell>{nasabah.status}</TableCell>
-              <TableCell>{nasabah.kunjungan}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
-      </Table>
-    )
-  }
+        <Table>
+            <TableCaption>List of customer deposits</TableCaption>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>nasabah</TableHead>
+                    <TableHead>tanggal</TableHead>
+                    <TableHead>rekening</TableHead>
+                    <TableHead>totalPrice</TableHead>
+                    <TableHead>status</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {data.map((nasabah, index) => (
+                    <TableRow key={index}>
+                        <TableCell className="font-medium">{nasabah.firstName} {nasabah.lastName}</TableCell>
+                        <TableCell>{formatDate(nasabah.createdAt)}</TableCell>
+                        <TableCell>{nasabah.rekening}</TableCell>
+                        <TableCell>{nasabah.totalPrice}</TableCell>
+                        <TableCell>{getStatusBadge(nasabah.action)}</TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+            <TableFooter>
+                <TableRow>
+                    <TableCell colSpan="3">Total Transfered</TableCell>
+                    <TableCell colSpan="2">
+                        {totalTransfered.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
+                    </TableCell>
+                </TableRow>
+            </TableFooter>
+        </Table>
+    );
+}
 
-
-
-export default IncomeTable
-  
+export default IncomeTable;

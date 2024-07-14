@@ -16,13 +16,14 @@ const Sidebar = () => {
     { title: "Dashboard", icon: BiChart, href:"/admin/dashboard" },
     { title: "Nasabah", icon: BiUser, href:"/admin/nasabah", gap: true },
     { title: "Penyetoran", icon: BiUser, href:"/admin/penyetoran" },
+    { title: "Hasil Penyetoran", icon: BiUser, href:"/admin/hasil" },
     { title: "Mitra", icon: LuBuilding, href:"/admin/mitra" },
     { title: "Pendataan Mitra", icon: LuBuilding, href:"/admin/pendataan" },
     { title: "Trash Detection", icon: LiaWineBottleSolid, href:"/admin/trash-detaction" },
     { title: "Trash Price", icon: LiaWineBottleSolid, href:"/admin/price" },
     { title: "Pick Up", icon: TbTruckDelivery, href:"/admin/pickup" },
     { title: "Education", icon: LuBookPlus, href:"/admin/education" },
-    { title: "Logout ", icon: FiLogOut, href:"/", gap: true },
+    { title: "Logout ", icon: FiLogOut, href:"/"},
   ];
 
   return (
@@ -32,8 +33,7 @@ const Sidebar = () => {
       } h-screen p-5  pt-8 relative duration-300`}
     >
       <BiChevronRight
-        className={`absolute cursor-pointer -right-3 top-9 w-7 border-white
-           border-2 rounded-full  ${!open && "rotate-180"}`}
+        className={`absolute cursor-pointer -right-3 top-9 w-7 border-white border-2 rounded-full  ${!open && "rotate-180"}`}
         style={{ backgroundColor: "#e47222" }} // Background color for BiChevronRight
         onClick={() => setOpen(!open)}
       />

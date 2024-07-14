@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import {
     Table,
     TableBody,
@@ -6,126 +8,68 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
+    TableFooter,
+} from "@/components/ui/table";
 
-const outcome = [
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada nominal untuk pembayaran ini
-    },
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada nominal untuk pembayaran ini
-    },
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada nominal untuk pembayaran ini
-    },
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada nominal untuk pembayaran ini
-    },
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada nominal untuk pembayaran ini
-    },
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada nominal untuk pembayaran ini
-    },
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada nominal untuk pembayaran ini
-    },
-    {
-        id:"3",
-        perusahaan: "pabrik A",
-        tanggal: "2024-03-25",
-        bank: "Bank Transfer",
-        rekening: "12121212", // Nomor rekening untuk transfer bank
-        status: "belum", // Karena status pembayaran adalah "Unpaid"
-        nominal: 0, // Belum ada kunjungan untuk pembayaran ini
-    },
-    // Lanjutkan untuk semua objek di array 'perusahaans'
-];
+const OutcomeTable = () => {
+    const [data, setData] = useState([]);
+    const [totalOutcome, setTotalOutcome] = useState(0);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/mitra', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                if (response.ok) {
+                    const result = await response.json();
+                    setData(result);
+                    // Hitung total nominal
+                    const total = result.reduce((acc, curr) => acc + parseInt(curr.nominal.replace(/\D/g, ''), 10), 0);
+                    setTotalOutcome(total);
+                } else {
+                    throw new Error("Failed to fetch outcome data");
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
+        fetchData();
+    }, []);
 
-  
-const OutcomeTable=()=> {
     return (
-      <Table>
-        <TableCaption>List of fund expenditures</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="">perusahaan</TableHead>
-            <TableHead>tanggal</TableHead>
-            <TableHead>bank</TableHead>
-            {/* <TableHead className="text-right">Amount</TableHead> */}
-            <TableHead>rekening</TableHead>
-            <TableHead>status</TableHead>
-            <TableHead>kunjungan</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {outcome.map((perusahaan) => (
-            <TableRow key={perusahaan.id}>
-              <TableCell className="font-medium">{perusahaan.perusahaan}</TableCell>
-              <TableCell>{perusahaan.tanggal}</TableCell>
-              <TableCell>{perusahaan.bank}</TableCell>
-              {/* <TableCell className="text-right">{perusahaan.totalAmount}</TableCell> */}
-              <TableCell>{perusahaan.rekening}</TableCell>
-              <TableCell>{perusahaan.status}</TableCell>
-              <TableCell>{perusahaan.nominal}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
-      </Table>
-    )
-  }
+        <Table>
+            <TableCaption>List of fund expenditures</TableCaption>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>Perusahaan</TableHead>
+                    <TableHead>Nominal</TableHead>
+                    <TableHead>Tanggal</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {data.map((outcome) => (
+                    <TableRow key={outcome._id}>
+                        <TableCell className="font-medium">{outcome.name}</TableCell>
+                        <TableCell>{outcome.nominal.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</TableCell>
+                        <TableCell>{new Date(outcome.date).toLocaleDateString()}</TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+            <TableFooter>
+                <TableRow>
+                    <TableCell colSpan={2}>Total Outcome</TableCell>
+                    <TableCell className="text-right">
+                        Rp {totalOutcome.toLocaleString('id-ID')}
+                    </TableCell>
+                </TableRow>
+            </TableFooter>
+        </Table>
+    );
+}
 
-
-
-export default OutcomeTable
-  
+export default OutcomeTable;

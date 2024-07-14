@@ -1,0 +1,90 @@
+
+.hasil-container{
+    overflow: hidden;
+}
+
+.hasil-card{
+    height: 400px;
+    overflow: scroll;
+}
+
+/* Styling untuk tabel */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Mengizinkan scroll horizontal jika konten tabel lebih lebar dari kontainer */
+    margin-bottom: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Mencegah teks membungkus ke baris berikutnya */
+    overflow: hidden; /* Sembunyikan konten yang meluap */
+    text-overflow: ellipsis; /* Tambahkan elipsis untuk konten yang dipotong */
+    max-width: 200px; /* Batas lebar sel */
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styling untuk badge status */
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    color: #fff;
+}
+
+.badge-green {
+    background-color: #28a745;
+}
+
+.badge-yellow {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-red {
+    background-color: #dc3545;
+}
+
+.badge-gray {
+    background-color: #6c757d;
+}
+
+/* Styling untuk input bulan */
+input[type="month"] {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5em;
+    font-size: 1em;
+}
+
+input[type="month"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+

@@ -29,12 +29,7 @@ exports.createTransaction = async (req, res) => {
 
 exports.getAllTransactions = async (req, res) => {
     try {
-        // Mendapatkan user ID dari token yang dikirimkan dari frontend
-        const userId = req.user._id;
-
-        // Mencari semua transaksi yang terkait dengan user yang sedang login
-        const transactions = await Transaction.find({ userId });
-
+        const transactions = await Transaction.find();
         res.status(200).json(transactions);
     } catch (error) {
         console.error("Error fetching transactions:", error);
