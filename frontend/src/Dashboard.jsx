@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-// Dashboard page
 import './Dashboard.css';
-// import { Button } from './components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Navbar from './components/ui/Navbar';
 import { useState, useEffect } from 'react';
+import Modal from './components/ui/Modal'; // Import modal component
+import { RiBillFill } from "react-icons/ri"; // Import icon
 
 export function CarouselDashboard({ education }) {
   return (
@@ -20,7 +20,6 @@ export function CarouselDashboard({ education }) {
                   <div className='carousel-content-child'>
                     <h1 className="judul">{item.title}</h1>
                     <p className="article">{item.article}</p>
-                    {/* <Button>Read More</Button> */}
                   </div>
                 </CardContent>
               </Card>
@@ -56,43 +55,45 @@ export default function Dashboard() {
   const [prices, setPrices] = useState([]);
   const [predictedPrices, setPredictedPrices] = useState([]);
   const [education, setEducation] = useState([]);
+  const [modalImage, setModalImage] = useState(null); // State to manage modal image
+
   const classMapping = {
-    'P5': 'P5', 
-    'P7': 'P7-P8', 
-    'P7 - Tutup': 'P7-P8', 
-    'P12 - MIX': 'P12-Mix. BM- Bening-P14', 
-    'P12 - BM': 'P12-Mix. BM- Bening-P14', 
-    'P12 - BENING': 'P12-Mix. BM- Bening-P14', 
-    'P14': 'P12-Mix. BM- Bening-P14', 
-    'P1': 'P20', 
-    'P8': 'P20', 
-    'P21': 'P21', 
-    'P9': 'P22-P23', 
-    'P20': 'P22-P23', 
-    'P22': 'P22-P23', 
-    'P23': 'P22-P23', 
-    'P26': 'P29', 
-    'P29': 'P29', 
-    'P31': 'P31-Galon Le-mineral', 
-    'Lemineral': 'Le-mineral', 
-    'P34': 'P17-P34-P37-Kemasan', 
-    'P38': 'P38-P39', 
-    'P39': 'P38-P39', 
-    'PM': 'S1-A3', 
-    'B8': 'B8-B9', 
-    'B9': 'B8-B9', 
-    'BW': 'BW-Bening-Warna', 
-    'Bening': 'BW-Bening-Warna', 
-    'Warna': 'BW-Bening-Warna', 
-    'K1': 'K1-K3-K4-K5-K6-K7-Tabloid', 
-    'K3': 'K1-K3-K4-K5-K6-K7-Tabloid', 
-    'K4': 'K1-K3-K4-K5-K6-K7-Tabloid', 
-    'K5': 'K1-K3-K4-K5-K6-K7-Tabloid', 
-    'K6': 'K1-K3-K4-K5-K6-K7-Tabloid', 
-    'K7': 'K1-K3-K4-K5-K6-K7-Tabloid', 
-    'Tabloid': 'K1-K3-K4-K5-K6-K7-Tabloid', 
-    'K2': 'K2', 
-    'Kemasan Obat': 'Kemasan Obat', 
+    'P5': 'P5',
+    'P7': 'P7-P8',
+    'P7 - Tutup': 'P7-P8',
+    'P12 - MIX': 'P12-Mix. BM- Bening-P14',
+    'P12 - BM': 'P12-Mix. BM- Bening-P14',
+    'P12 - BENING': 'P12-Mix. BM- Bening-P14',
+    'P14': 'P12-Mix. BM- Bening-P14',
+    'P1': 'P20',
+    'P8': 'P20',
+    'P21': 'P21',
+    'P9': 'P22-P23',
+    'P20': 'P22-P23',
+    'P22': 'P22-P23',
+    'P23': 'P22-P23',
+    'P26': 'P29',
+    'P29': 'P29',
+    'P31': 'P31-Galon Le-mineral',
+    'Lemineral': 'Le-mineral',
+    'P34': 'P17-P34-P37-Kemasan',
+    'P38': 'P38-P39',
+    'P39': 'P38-P39',
+    'PM': 'S1-A3',
+    'B8': 'B8-B9',
+    'B9': 'B8-B9',
+    'BW': 'BW-Bening-Warna',
+    'Bening': 'BW-Bening-Warna',
+    'Warna': 'BW-Bening-Warna',
+    'K1': 'K1-K3-K4-K5-K6-K7-Tabloid',
+    'K3': 'K1-K3-K4-K5-K6-K7-Tabloid',
+    'K4': 'K1-K3-K4-K5-K6-K7-Tabloid',
+    'K5': 'K1-K3-K4-K5-K6-K7-Tabloid',
+    'K6': 'K1-K3-K4-K5-K6-K7-Tabloid',
+    'K7': 'K1-K3-K4-K5-K6-K7-Tabloid',
+    'Tabloid': 'K1-K3-K4-K5-K6-K7-Tabloid',
+    'K2': 'K2',
+    'Kemasan Obat': 'Kemasan Obat',
     'Mika': 'Mika'
   };
 
@@ -100,10 +101,12 @@ export default function Dashboard() {
     const token = getCookie("token");
 
     Promise.all([
-      fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/getTotalHarga", token).then(setTotalHarga),
-      fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/getStatus", token).then(setTransaction),
-      fetchData(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
-      fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/education").then(data => setEducation(data.reverse())),
+      fetchData("http://localhost:3000/api/user/getTotalHarga", token).then(setTotalHarga),
+      fetchData("http://localhost:3000/api/user/getUserStatus", token).then(data => {
+        setTransaction(data);
+      }),
+      fetchData(`http://localhost:3000/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
+      fetchData("http://localhost:3000/api/user/education").then(data => setEducation(data.reverse())),
     ]).catch(error => console.error("Error fetching data:", error));
 
     // Fetch predicted prices for next month
@@ -112,11 +115,11 @@ export default function Dashboard() {
         const nextMonth = new Date();
         nextMonth.setMonth(nextMonth.getMonth() + 1);
         const nextMonthStr = nextMonth.toISOString().slice(0, 7); // Format YYYY-MM
-        
+
         const promises = totalHarga.map(async transaksi => {
           return Promise.all(transaksi.trashClass.map(async trashClassItem => {
             const mappedTrashType = classMapping[trashClassItem] || trashClassItem;
-            const response = await fetch("https://bank-sampah-bersinar-1.onrender.com/api/predict", {
+            const response = await fetch("http://localhost:5000/api/predict", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -170,6 +173,14 @@ export default function Dashboard() {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalPredictedPrice);
   };
 
+  const openModalWithImage = (image) => {
+    setModalImage(image);
+  };
+
+  const closeModal = () => {
+    setModalImage(null);
+  };
+
   return (
     <>
       <div className="min-h-full">
@@ -209,13 +220,14 @@ export default function Dashboard() {
             <div className="kanan">
               <Card className="history shadow-lg">
                 <CardContent>
-                  <DashboardTable transactions={transaction} />
+                  <DashboardTable transactions={transaction} openModalWithImage={openModalWithImage} />
                 </CardContent>
               </Card>
             </div>
           </div>
         </main>
       </div>
+      {modalImage && <Modal image={modalImage} onClose={closeModal} />}
     </>
   );
 }
@@ -229,7 +241,7 @@ const Badge = ({ text, color }) => (
   <span className={`badge badge-${color}`}>{text}</span>
 );
 
-const DashboardTable = ({ transactions }) => {
+const DashboardTable = ({ transactions, openModalWithImage }) => {
   const reversedTransactions = [...transactions].reverse();
 
   const getBadgeColor = (action) => {
@@ -245,6 +257,30 @@ const DashboardTable = ({ transactions }) => {
     }
   };
 
+  const fetchTransferedPict = async (userId) => {
+    try {
+      const token = getCookie("token"); // Ambil token dari cookie
+      const response = await fetch(`http://localhost:3000/api/user/getTransferedPict/${userId}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`, // Sertakan token dalam header
+        }
+      });
+      if (!response.ok) throw new Error("Failed to fetch transferedPict");
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching transferedPict:", error);
+      return null;
+    }
+  };
+
+  const handleOpenImage = async (userId) => {
+    const image = await fetchTransferedPict(userId);
+    if (image) {
+      openModalWithImage(image);
+    }
+  };
+
   return (
     <Table>
       <TableCaption>A list of your recent transactions</TableCaption>
@@ -255,6 +291,7 @@ const DashboardTable = ({ transactions }) => {
           <TableHead>Date</TableHead>
           <TableHead>Rekening</TableHead>
           <TableHead className="text-right">Total Price</TableHead>
+          <TableHead className="text-right">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="dashboard-table-body">
@@ -267,6 +304,14 @@ const DashboardTable = ({ transactions }) => {
             <TableCell>{transaction.createdAt.slice(0, 10)}</TableCell>
             <TableCell>{transaction.rekening}</TableCell>
             <TableCell className="text-right">{transaction.totalPrice}</TableCell>
+            <TableCell className="text-right">
+              {transaction.action === 'Transfered' && (
+                <RiBillFill
+                  style={{ cursor: 'pointer', fontSize: '1.5em' }}
+                  onClick={() => handleOpenImage(transaction.userId)}
+                />
+              )}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

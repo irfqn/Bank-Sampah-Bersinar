@@ -7,8 +7,9 @@ const { harga, getPriceByMonth } = require("../controller/priceController");
 const { education, getAlleducation } = require("../controller/eduControlle");
 const { createTotalPrice, getTotalPrice, resetTrashClassAndTotalHarga } = require("../controller/totalController");
 const { submitForm, getAllForms, getUserFormsAndPickups } = require("../controller/formController");
-const { createTransaction, getAllTransactions } = require("../controller/statusController");
+const { createTransaction, getAllTransactions, getTransactionsByUserId } = require("../controller/statusController");
 const { getAllPickups, updatePickupStatus } = require("../controller/pickupController");
+const { submitTransfered, getTransferedPictByUserId } = require("../controller/transferedController");
 
 // USER API
 router.post("/login", login);
@@ -45,10 +46,14 @@ router.get("/userFormsAndPickups", verifyToken, getUserFormsAndPickups);
 
 // STATUS API
 router.post("/status", createTransaction);
-router.get("/getStatus", getAllTransactions); // Tidak perlu token
+router.get("/getStatus", getAllTransactions); // Tetap ada
+router.get("/getUserStatus", verifyToken, getTransactionsByUserId); // Rute baru untuk mengambil transaksi berdasarkan userId
 
 // PICKUP API
 router.get("/pickups", getAllPickups);
 router.post("/updatePickupStatus/:id", verifyToken, updatePickupStatus);
+
+// TRANSFERRED API
+router.post("/submitTransfered", submitTransfered); router.get("/getTransferedPict/:userId", verifyToken, getTransferedPictByUserId);
 
 module.exports = router;
