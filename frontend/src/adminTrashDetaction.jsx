@@ -45,7 +45,7 @@ const TrashDetactionMain = () => {
   useEffect(() => {
     tf.ready().then(async () => {
       await tf.ready();
-      const modelUrl = `../best_web_model/model.json`;
+      const modelUrl = `https://bank-sampah-bersinar.web.app/model.json`;
       const yolov8 = await tf.loadGraphModel(modelUrl);
       console.log(yolov8);
 

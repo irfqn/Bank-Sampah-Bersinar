@@ -52,7 +52,7 @@ const RequestTable = () => {
 
     const fetchFormData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/user/getAllForms');
+            const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/getAllForms');
             if (!response.ok) {
                 throw new Error('Gagal mengambil data form');
             }
@@ -65,7 +65,7 @@ const RequestTable = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/user/users');
+            const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/users');
             if (!response.ok) {
                 throw new Error('Gagal mengambil data pengguna');
             }
@@ -143,7 +143,7 @@ const RequestTable = () => {
             transferedPict: fileBase64
         };
 
-        const response = await fetch('http://localhost:3000/api/user/submitTransfered', {
+        const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/submitTransfered', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -157,7 +157,7 @@ const RequestTable = () => {
             setSuccess('Transaksi berhasil disubmit');
             if (action === 'Transfered') {
                 const token = getCookie('token');
-                const resetResponse = await fetch(`http://localhost:3000/api/user/resetTrashClass/${data.userId}`, {
+                const resetResponse = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

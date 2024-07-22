@@ -238,7 +238,7 @@ const AdminTPrice = () => {
             const params = new URLSearchParams({ month: rightMonth });
 
             // Pengambilan data trash dari API dengan parameter month
-            const response = await fetch(`http://localhost:3000/api/user/getPrice?${params.toString()}`, {
+            const response = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getPrice?${params.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
