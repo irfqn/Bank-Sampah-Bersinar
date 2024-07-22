@@ -101,12 +101,12 @@ export default function Dashboard() {
     const token = getCookie("token");
 
     Promise.all([
-      fetchData("http://localhost:3000/api/user/getTotalHarga", token).then(setTotalHarga),
-      fetchData("http://localhost:3000/api/user/getUserStatus", token).then(data => {
+      fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/getTotalHarga", token).then(setTotalHarga),
+      fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/getUserStatus", token).then(data => {
         setTransaction(data);
       }),
-      fetchData(`http://localhost:3000/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
-      fetchData("http://localhost:3000/api/user/education").then(data => setEducation(data.reverse())),
+      fetchData(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
+      fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/education").then(data => setEducation(data.reverse())),
     ]).catch(error => console.error("Error fetching data:", error));
 
     // Fetch predicted prices for next month
@@ -260,7 +260,7 @@ const DashboardTable = ({ transactions, openModalWithImage }) => {
   const fetchTransferedPict = async (userId) => {
     try {
       const token = getCookie("token"); // Ambil token dari cookie
-      const response = await fetch(`http://localhost:3000/api/user/getTransferedPict/${userId}`, {
+      const response = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getTransferedPict/${userId}`, {
         headers: {
           "Authorization": `Bearer ${token}`, // Sertakan token dalam header
         }
