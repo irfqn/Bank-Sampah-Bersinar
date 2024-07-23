@@ -8,7 +8,7 @@ const { education, getAlleducation } = require("../controller/eduControlle");
 const { createTotalPrice, getTotalPrice, resetTrashClassAndTotalHarga } = require("../controller/totalController");
 const { submitForm, getAllForms, getUserFormsAndPickups } = require("../controller/formController");
 const { createTransaction, getAllTransactions, getTransactionsByUserId } = require("../controller/statusController");
-const { getAllPickups, updatePickupStatus } = require("../controller/pickupController");
+const { getAllPickups, updatePickupStatus, getPickUpById } = require("../controller/pickupController");
 const { submitTransfered, getTransferedPictByUserId } = require("../controller/transferedController");
 
 // USER API
@@ -52,8 +52,10 @@ router.get("/getUserStatus", verifyToken, getTransactionsByUserId); // Rute baru
 // PICKUP API
 router.get("/pickups", getAllPickups);
 router.post("/updatePickupStatus/:id", verifyToken, updatePickupStatus);
+router.get("/getPickUpById", verifyToken, getPickUpById)
 
 // TRANSFERRED API
-router.post("/submitTransfered", submitTransfered); router.get("/getTransferedPict/:userId", verifyToken, getTransferedPictByUserId);
+router.post("/submitTransfered", submitTransfered);
+router.get("/getTransferedPict/:userId", verifyToken, getTransferedPictByUserId);
 
 module.exports = router;

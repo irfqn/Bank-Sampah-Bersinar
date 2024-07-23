@@ -33,7 +33,18 @@ const updatePickupStatus = async (req, res) => {
     }
 };
 
+const getPickUpById = async (req, res) => {
+    try {
+        const userId = req.user._id
+        const pickupId = await Pickup.find({ userId })
+        res.status(200).json(pickupId)
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
 module.exports = {
     getAllPickups,
     updatePickupStatus,
+    getPickUpById
 };
