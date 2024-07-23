@@ -94,7 +94,7 @@ const FormPenyetoran = () => {
     const fetchPickupData = async () => {
       try {
         const token = getCookie("token");
-        const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/pickups", {
+        const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/getPickUpById", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

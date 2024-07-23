@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import './Modal.css'; // Create and import CSS for Modal
+import './Modal.css'; // Make sure to style your modal
 
 const Modal = ({ image, onClose }) => {
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <span className="close-button" onClick={onClose}>&times;</span>
+    <div className="modal">
+      <div className="modal-content">
+        <span className="close" onClick={onClose}>&times;</span>
         <img src={image} alt="Transfered" className="modal-image" />
       </div>
     </div>
@@ -15,3 +15,5 @@ const Modal = ({ image, onClose }) => {
 };
 
 export default Modal;
+
+

@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from "./components/ui/sidebar";
@@ -143,18 +142,33 @@ const RequestTable = () => {
             transferedPict: fileBase64
         };
 
-        const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/submitTransfered', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postData)
-        });
+        try {
+            // Call the submitTransfered API
+            const responseTransfered = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/submitTransfered', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            });
 
-        setLoading(false);
+            if (!responseTransfered.ok) {
+                throw new Error('Gagal mengirim transaksi');
+            }
 
-        if (response.ok) {
-            setSuccess('Transaksi berhasil disubmit');
+            // Call the createTransaction API
+            const responseStatus = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            });
+
+            if (!responseStatus.ok) {
+                throw new Error('Gagal membuat transaksi');
+            }
+
             if (action === 'Transfered') {
                 const token = getCookie('token');
                 const resetResponse = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`, {
@@ -165,14 +179,19 @@ const RequestTable = () => {
                     }
                 });
 
-                if (resetResponse.ok) {
-                    mergeData();
-                } else {
-                    setError('Gagal mereset array trashClass dan totalHarga');
+                if (!resetResponse.ok) {
+                    throw new Error('Gagal mereset array trashClass dan totalHarga');
                 }
             }
-        } else {
-            setError('Gagal mengirim transaksi');
+
+            setLoading(false);
+            setSuccess('Transaksi berhasil disubmit');
+            mergeData(); // Refresh the data after successful submission
+
+        } catch (error) {
+            console.error(error);
+            setError(error.message);
+            setLoading(false);
         }
     };
 

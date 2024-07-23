@@ -103,6 +103,7 @@ export default function Dashboard() {
     Promise.all([
       fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/getTotalHarga", token).then(setTotalHarga),
       fetchData("https://bank-sampah-bersinar.azurewebsites.net/api/user/getUserStatus", token).then(data => {
+        console.log("Transactions Data:", data);
         setTransaction(data);
       }),
       fetchData(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getPrice?month=${new Date().toISOString().slice(0, 7)}`).then(setPrices),
@@ -267,7 +268,7 @@ const DashboardTable = ({ transactions, openModalWithImage }) => {
       });
       if (!response.ok) throw new Error("Failed to fetch transferedPict");
       const data = await response.json();
-      return data;
+      return data.length > 0 ? data[data.length - 1] : null; // Return the most recent picture
     } catch (error) {
       console.error("Error fetching transferedPict:", error);
       return null;
@@ -278,6 +279,8 @@ const DashboardTable = ({ transactions, openModalWithImage }) => {
     const image = await fetchTransferedPict(userId);
     if (image) {
       openModalWithImage(image);
+    } else {
+      console.error("No image found");
     }
   };
 
