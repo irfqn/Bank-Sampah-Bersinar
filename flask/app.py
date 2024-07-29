@@ -100,7 +100,7 @@ from flask_cors import CORS
 from sklearn.ensemble import RandomForestRegressor  # Tambahkan ini untuk memastikan sklearn diimport
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={r"/api/*": {"origins": "https://bank-sampah-bersinar-11oj.vercel.app"}})
 
 # URL model di Firebase Hosting
 MODEL_URL = "https://bank-sampah-bersinar.web.app/random_forest_regressor2.pkl"
