@@ -30,8 +30,10 @@ export function SelectDemo({ value, onChange }) {
           <SelectItem value="P12 - BENING">P12 - BENING</SelectItem>
           <SelectItem value="P14">P14</SelectItem>
           <SelectItem value="P1">P1</SelectItem>
-          <SelectItem value="P20">P20</SelectItem>
+          <SelectItem value="P8">P8</SelectItem>
           <SelectItem value="P21">P21</SelectItem>
+          <SelectItem value="P9">P9</SelectItem>
+          <SelectItem value="P20">P20</SelectItem>
           <SelectItem value="P22">P22</SelectItem>
           <SelectItem value="P23">P23</SelectItem>
           <SelectItem value="P26">P26</SelectItem>
@@ -42,15 +44,26 @@ export function SelectDemo({ value, onChange }) {
           <SelectItem value="P38">P38</SelectItem>
           <SelectItem value="P39">P39</SelectItem>
           <SelectItem value="PM">PM</SelectItem>
-          <SelectItem value="BW BENING">BW BENING</SelectItem>
-          <SelectItem value="Mika">Mika</SelectItem>
+          <SelectItem value="B8">B8</SelectItem>
+          <SelectItem value="B9">B9</SelectItem>
+          <SelectItem value="BW">BW</SelectItem>
+          <SelectItem value="Bening">Bening</SelectItem>
+          <SelectItem value="Warna">Warna</SelectItem>
+          <SelectItem value="K1">K1</SelectItem>
+          <SelectItem value="K3">K3</SelectItem>
+          <SelectItem value="K4">K4</SelectItem>
+          <SelectItem value="K5">K5</SelectItem>
+          <SelectItem value="K6">K6</SelectItem>
+          <SelectItem value="K7">K7</SelectItem>
+          <SelectItem value="Tabloid">Tabloid</SelectItem>
+          <SelectItem value="K2">K2</SelectItem>
           <SelectItem value="Kemasan Obat">Kemasan Obat</SelectItem>
+          <SelectItem value="Mika">Mika</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
   );
 }
-
 // export function SelectDemo({ value, onChange }) {
 //   return (
 //     <Select value={value} onValueChange={onChange} className="bg-white">
