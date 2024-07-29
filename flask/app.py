@@ -103,7 +103,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # URL model di Firebase Hosting
-MODEL_URL = "https://bank-sampah-bersinar.web.app/random_forest_regressor.pkl"
+MODEL_URL = "https://bank-sampah-bersinar.web.app/best_decision_tree_model.pkl"
 
 # Fungsi untuk mengunduh file
 def download_model(url, dest_path):
