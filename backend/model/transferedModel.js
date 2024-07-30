@@ -7,7 +7,7 @@ const transferedSchema = new mongoose.Schema({
     },
     transferedPict: {
         type: String,
-        required: true
+
     }
 }, { collection: "transfered" })
 
