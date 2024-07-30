@@ -149,6 +149,9 @@ const RequestTable = () => {
             transferedPict: fileBase64 || '' // Send an empty string if no file was uploaded
         };
 
+        // Log postData to check its format
+        console.log('Post Data:', postData);
+
         try {
             // Call the submitTransfered API
             const responseTransfered = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/submitTransfered', {
@@ -160,7 +163,8 @@ const RequestTable = () => {
             });
 
             if (!responseTransfered.ok) {
-                throw new Error('Gagal mengirim transaksi');
+                const errorText = await responseTransfered.text();
+                throw new Error(`Gagal mengirim transaksi: ${errorText}`);
             }
 
             // Call the createTransaction API
@@ -173,7 +177,8 @@ const RequestTable = () => {
             });
 
             if (!responseStatus.ok) {
-                throw new Error('Gagal membuat transaksi');
+                const errorText = await responseStatus.text();
+                throw new Error(`Gagal membuat transaksi: ${errorText}`);
             }
 
             if (action === 'Transfered') {
@@ -187,7 +192,8 @@ const RequestTable = () => {
                 });
 
                 if (!resetResponse.ok) {
-                    throw new Error('Gagal mereset array trashClass dan totalHarga');
+                    const errorText = await resetResponse.text();
+                    throw new Error(`Gagal mereset array trashClass dan totalHarga: ${errorText}`);
                 }
             }
 
