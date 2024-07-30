@@ -145,9 +145,12 @@ const RequestTable = () => {
 
         const postData = {
             _id: data._id,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            rekening: data.rekening,
+            nik: data.nik,
             totalPrice: data.totalPrice.replace(/\D/g, ''), // Remove non-numeric characters from totalPrice
             bank: data.bank,
-            rekening: data.rekening,
             userId: data.userId,
             action: action,
             transferedPict: fileBase64 || '' // Send an empty string if no file was uploaded
