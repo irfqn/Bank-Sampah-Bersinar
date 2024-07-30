@@ -136,10 +136,17 @@ const RequestTable = () => {
         const action = actionValues[id];
         const fileBase64 = fileInputs[id];
 
+        // If action is 'Transfered', ensure that the file has been uploaded
+        if (action === 'Transfered' && !fileBase64) {
+            setError('Harap unggah foto untuk status Transfered.');
+            setLoading(false);
+            return;
+        }
+
         const postData = {
             ...data,
             action: action,
-            transferedPict: fileBase64
+            transferedPict: fileBase64 || '' // Send an empty string if no file was uploaded
         };
 
         try {
@@ -186,6 +193,14 @@ const RequestTable = () => {
 
             setLoading(false);
             setSuccess('Transaksi berhasil disubmit');
+            window.alert('Transaksi berhasil disubmit'); // Show success alert
+
+            // Keep the selected action after submission
+            setActionValues(prevState => ({
+                ...prevState,
+                [id]: action
+            }));
+
             mergeData(); // Refresh the data after successful submission
 
         } catch (error) {
@@ -235,16 +250,20 @@ const RequestTable = () => {
                                 </select>
                             </TableCell>
                             <TableCell>
-                                <input
-                                    type="file"
-                                    style={{ display: 'none' }}
-                                    ref={el => (fileInputRefs.current[data._id] = el)}
-                                    onChange={(e) => handleFileChange(data._id, e.target.files[0])}
-                                />
-                                <RiFileUploadFill
-                                    style={{ cursor: 'pointer', fontSize: '1.5em' }}
-                                    onClick={() => triggerFileInput(data._id)}
-                                />
+                                {actionValues[data._id] === 'Transfered' && (
+                                    <>
+                                        <input
+                                            type="file"
+                                            style={{ display: 'none' }}
+                                            ref={el => (fileInputRefs.current[data._id] = el)}
+                                            onChange={(e) => handleFileChange(data._id, e.target.files[0])}
+                                        />
+                                        <RiFileUploadFill
+                                            style={{ cursor: 'pointer', fontSize: '1.5em' }}
+                                            onClick={() => triggerFileInput(data._id)}
+                                        />
+                                    </>
+                                )}
                             </TableCell>
                             <TableCell>
                                 <button className="submit-button" onClick={() => handleSubmit(data._id)}>Submit</button>
