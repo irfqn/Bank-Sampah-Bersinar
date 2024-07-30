@@ -20,12 +20,12 @@ const AdminTrashDetaction = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <TrashDetactionMain />
+      <TrashDetectionMain />
     </div>
   );
 };
 
-const TrashDetactionMain = () => {
+const TrashDetectionMain = () => {
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState({ loading: true, progress: 0 });
   const [model, setModel] = useState({
@@ -139,16 +139,16 @@ const TrashDetactionMain = () => {
   };
 
   return (
-    <div className="h-screen flex-1 p-7 td-main-page" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="h-screen flex-1 p-7 td-main-page-unique">
       <h1 className="text-2xl font-semibold">Trash Detection</h1>
-      <main className="td-container">
+      <main className="td-container-unique">
         <div>
           <p style={{ marginBottom: "1rem" }}>Lihat harga dan jenis sampah anda disini!</p>
         </div>
-        <Card className="scan-card shadow-lg">
+        <Card className="scan-card-unique shadow-lg">
           {!isScanCompleted ? (
             <>
-              <div className="td-left">
+              <div className="td-left-unique">
                 <Webcam
                   audio={false}
                   ref={webcamRef}
@@ -157,15 +157,16 @@ const TrashDetactionMain = () => {
                 />
                 <img ref={imageRef} style={{ display: "none" }} alt="Uploaded" />
               </div>
-              <div className="td-right">
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  ref={fileInputRef}
-                  style={{ marginTop: '10px' }}
-                />
-                <Button className="bg-black text-white mt-3" onClick={handleCapture}>Scan</Button>
+              <div className="td-right-unique">
+                <div className="file-scan-section-unique">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    ref={fileInputRef}
+                  />
+                  <Button className="bg-black text-white" onClick={handleCapture}>Scan</Button>
+                </div>
               </div>
             </>
           ) : (

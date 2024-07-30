@@ -1,34 +1,40 @@
-.td-main-page{
+.td-main-page-unique {
     overflow: hidden;
 }
 
-.td-container{
-    /* padding-inline: 2rem; */
+.td-container-unique {
     padding-block: 3.9rem;
     width: 100%;
     height: 90.2vh;
 }
 
-.scan-card {
+.scan-card-unique {
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
     column-gap: 1rem;
     flex-wrap: wrap;
 }
 
-.td-left {
-    width: 100%; /* Menggunakan lebar penuh */
-    max-width: 600px; /* Atur lebar maksimum sesuai kebutuhan */
-    /* margin-bottom: 10px; Atur margin bawah jika diperlukan */
+.td-left-unique {
+    width: 100%; 
+    max-width: 600px;
 }
 
-/* Menambahkan properti CSS untuk membuat gambar responsif */
-.td-left video {
+.td-left-unique video {
     width: 100%;
     height: auto;
 }
 
-.td-right{
+.td-right-unique {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.file-scan-section-unique {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
 }
