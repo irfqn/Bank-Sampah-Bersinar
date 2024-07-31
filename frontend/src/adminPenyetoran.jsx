@@ -156,9 +156,6 @@ const RequestTable = () => {
             transferedPict: fileBase64 || '' // Send an empty string if no file was uploaded
         };
     
-        // Log postData to check its format
-        console.log('Post Data:', postData);
-    
         try {
             // Only call the submitTransfered API if action is 'Transfered'
             if (action === 'Transfered') {
@@ -176,7 +173,6 @@ const RequestTable = () => {
                 }
     
                 const token = getCookie('token');
-                // Make sure the URL is correct
                 const resetUrl = `https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`;
                 console.log('Reset URL:', resetUrl);
     
@@ -190,11 +186,15 @@ const RequestTable = () => {
     
                 if (!resetResponse.ok) {
                     const errorText = await resetResponse.text();
-                    throw new Error(`Gagal mereset array trashClass dan totalHarga: ${errorText}`);
+                    // Log the errorText for debugging
+                    console.error(`Gagal mereset array trashClass dan totalHarga: ${errorText}`);
+                    // Handle error gracefully and continue with the next steps
+                } else {
+                    console.log('Reset successful:', await resetResponse.json());
                 }
             }
     
-            // Call the createTransaction API
+            // Call the createTransaction API regardless of the reset status
             const responseStatus = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/status', {
                 method: 'POST',
                 headers: {
@@ -226,6 +226,7 @@ const RequestTable = () => {
             setLoading(false);
         }
     };
+    
     
 
     const triggerFileInput = (id) => {
