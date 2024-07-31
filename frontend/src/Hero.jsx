@@ -19,9 +19,9 @@ import instagramLogo from "./assets/img/mdi_instagram (1).png";
 import { useNavigate } from "react-router-dom";
 
 const navigation = [
-  { name: "solarPhone", src: solarPhone, href: "#" },
-  { name: "linkedinLogo", src: linkedinLogo, href: "#" },
-  { name: "instagramLogo", src: instagramLogo, href: "#" },
+  { name: "solarPhone", src: solarPhone, href: "https://www.banksampahbersinar.com/" },
+  { name: "linkedinLogo", src: linkedinLogo, href: "https://www.linkedin.com/company/pt-solusi-rahayu-indonesia-bank-sampah-bersinar/" },
+  { name: "instagramLogo", src: instagramLogo, href: "https://www.instagram.com/banksampahbersinar.id?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
 ];
 
 const Hero = () => {

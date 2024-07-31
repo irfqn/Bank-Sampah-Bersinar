@@ -64,7 +64,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/ui/Navbar";
 import { Card } from "./components/ui/card"
-import { Button } from "./components/ui/button"
+// import { Button } from "./components/ui/button"
 import "./UserProfile.css"
 
 const UserProfile = () => {
@@ -159,7 +159,7 @@ const UserProfile = () => {
                 </div>
               </div>
               {/* <Button className="edit-profile">Edit Profile</Button> */}
-              <Button className="sign-out">Sign Out</Button>
+              {/* <Button className="sign-out">Sign Out</Button> */}
             </Card>
           ) : (
             <p>Loading...</p>
