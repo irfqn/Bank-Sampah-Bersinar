@@ -53,7 +53,18 @@ const Prediction = () => {
     'Mika': 'Mika'
   };
 
+  const getCurrentMonthName = () => {
+    const date = new Date();
+    const formatter = new Intl.DateTimeFormat('id-ID', { month: 'long', year: 'numeric' });
+    return formatter.format(date);
+  };
+
   const handlePredict = async () => {
+    if (!trashType || !predictionDate) {
+      alert("Please select trash type and prediction date");
+      return;
+    }
+
     const mappedTrashType = classMapping[trashType] || trashType;
 
     try {
@@ -83,6 +94,10 @@ const Prediction = () => {
   };
 
   const fetchCurrentPrice = async () => {
+    if (!trashType) {
+      return;
+    }
+
     const mappedTrashType = classMapping[trashType] || trashType;
     const currentMonth = new Date().toISOString().slice(0, 7); // Current month in format YYYY-MM
     try {
@@ -139,7 +154,7 @@ const Prediction = () => {
             <Card className="current-price shadow-lg">
               <CardHeader>
                 <CardTitle>Current Price</CardTitle>
-                <CardDescription>from {new Date().toISOString().slice(0, 7)}</CardDescription>
+                <CardDescription>from {getCurrentMonthName()}</CardDescription>
                 <CardContent>
                   <h1>{loading ? "Loading..." : currentPrice ? `Rp ${currentPrice}` : "Select trash type"}</h1>
                 </CardContent>
