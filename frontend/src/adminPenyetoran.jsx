@@ -171,30 +171,9 @@ const RequestTable = () => {
                     const errorText = await responseTransfered.text();
                     throw new Error(`Gagal mengirim transaksi: ${errorText}`);
                 }
-    
-                const token = getCookie('token');
-                const resetUrl = `https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`;
-                console.log('Reset URL:', resetUrl);
-    
-                const resetResponse = await fetch(resetUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-    
-                if (!resetResponse.ok) {
-                    const errorText = await resetResponse.text();
-                    // Log the errorText for debugging
-                    console.error(`Gagal mereset array trashClass dan totalHarga: ${errorText}`);
-                    // Handle error gracefully and continue with the next steps
-                } else {
-                    console.log('Reset successful:', await resetResponse.json());
-                }
             }
     
-            // Call the createTransaction API regardless of the reset status
+            // Call the createTransaction API
             const responseStatus = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/status', {
                 method: 'POST',
                 headers: {
@@ -226,6 +205,7 @@ const RequestTable = () => {
             setLoading(false);
         }
     };
+    
     
     
 
