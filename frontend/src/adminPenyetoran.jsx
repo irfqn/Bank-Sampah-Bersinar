@@ -131,18 +131,18 @@ const RequestTable = () => {
         setLoading(true);
         setError(null);
         setSuccess(null);
-
+    
         const data = formData.find((form) => form._id === id);
         const action = actionValues[id];
         const fileBase64 = fileInputs[id];
-
+    
         // If action is 'Transfered', ensure that the file has been uploaded
         if (action === 'Transfered' && !fileBase64) {
             setError('Harap unggah foto untuk status Transfered.');
             setLoading(false);
             return;
         }
-
+    
         const postData = {
             _id: data._id,
             firstName: data.firstName,
@@ -155,10 +155,10 @@ const RequestTable = () => {
             action: action,
             transferedPict: fileBase64 || '' // Send an empty string if no file was uploaded
         };
-
+    
         // Log postData to check its format
         console.log('Post Data:', postData);
-
+    
         try {
             // Only call the submitTransfered API if action is 'Transfered'
             if (action === 'Transfered') {
@@ -169,27 +169,31 @@ const RequestTable = () => {
                     },
                     body: JSON.stringify(postData)
                 });
-
+    
                 if (!responseTransfered.ok) {
                     const errorText = await responseTransfered.text();
                     throw new Error(`Gagal mengirim transaksi: ${errorText}`);
                 }
-
+    
                 const token = getCookie('token');
-                const resetResponse = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`, {
+                // Make sure the URL is correct
+                const resetUrl = `https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`;
+                console.log('Reset URL:', resetUrl);
+    
+                const resetResponse = await fetch(resetUrl, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     }
                 });
-
+    
                 if (!resetResponse.ok) {
                     const errorText = await resetResponse.text();
                     throw new Error(`Gagal mereset array trashClass dan totalHarga: ${errorText}`);
                 }
             }
-
+    
             // Call the createTransaction API
             const responseStatus = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/status', {
                 method: 'POST',
@@ -198,30 +202,31 @@ const RequestTable = () => {
                 },
                 body: JSON.stringify(postData)
             });
-
+    
             if (!responseStatus.ok) {
                 const errorText = await responseStatus.text();
                 throw new Error(`Gagal membuat transaksi: ${errorText}`);
             }
-
+    
             setLoading(false);
             setSuccess('Transaksi berhasil disubmit');
             window.alert('Transaksi berhasil disubmit'); // Show success alert
-
+    
             // Keep the selected action after submission
             setActionValues(prevState => ({
                 ...prevState,
                 [id]: action
             }));
-
+    
             mergeData(); // Refresh the data after successful submission
-
+    
         } catch (error) {
             console.error(error);
             setError(error.message);
             setLoading(false);
         }
     };
+    
 
     const triggerFileInput = (id) => {
         if (fileInputRefs.current[id]) {
