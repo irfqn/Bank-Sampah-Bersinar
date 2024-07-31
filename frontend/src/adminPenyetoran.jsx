@@ -122,6 +122,7 @@ const RequestTable = () => {
         }));
     };
 
+    // eslint-disable-next-line no-unused-vars
     const getCookie = (name) => {
         const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
         return cookieValue ? cookieValue.pop() : '';
@@ -170,27 +171,6 @@ const RequestTable = () => {
                 if (!responseTransfered.ok) {
                     const errorText = await responseTransfered.text();
                     throw new Error(`Gagal mengirim transaksi: ${errorText}`);
-                }
-
-                const token = getCookie('token');
-                const resetUrl = `https://bank-sampah-bersinar.azurewebsites.net/api/user/resetTrashClass/${data.userId}`;
-                console.log('Reset URL:', resetUrl);
-
-                const resetResponse = await fetch(resetUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (!resetResponse.ok) {
-                    const errorText = await resetResponse.text();
-                    // Log the errorText for debugging
-                    console.error(`Gagal mereset array trashClass dan totalHarga: ${errorText}`);
-                    throw new Error(`Gagal mereset array trashClass dan totalHarga: ${errorText}`);
-                } else {
-                    console.log('Reset successful:', await resetResponse.json());
                 }
             }
 
