@@ -25,7 +25,7 @@ const AdminHasil = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getStatus`);
+                const response = await fetch(`https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/getStatus`);
                 const result = await response.json();
                 setData(result);
             } catch (error) {

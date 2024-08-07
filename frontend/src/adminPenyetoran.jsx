@@ -51,7 +51,7 @@ const RequestTable = () => {
 
     const fetchFormData = async () => {
         try {
-            const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/getAllForms');
+            const response = await fetch('https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/getAllForms');
             if (!response.ok) {
                 throw new Error('Gagal mengambil data form');
             }
@@ -64,7 +64,7 @@ const RequestTable = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/users');
+            const response = await fetch('https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/users');
             if (!response.ok) {
                 throw new Error('Gagal mengambil data pengguna');
             }
@@ -160,7 +160,7 @@ const RequestTable = () => {
         try {
             // Only call the submitTransfered API if action is 'Transfered'
             if (action === 'Transfered') {
-                const responseTransfered = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/submitTransfered', {
+                const responseTransfered = await fetch('https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/submitTransfered', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -175,7 +175,7 @@ const RequestTable = () => {
             }
 
             // Call the createTransaction API
-            const responseStatus = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/status', {
+            const responseStatus = await fetch('https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/status', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

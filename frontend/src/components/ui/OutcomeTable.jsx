@@ -18,7 +18,7 @@ const OutcomeTable = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://bank-sampah-bersinar.azurewebsites.net/api/user/mitra', {
+                const response = await fetch('https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/mitra', {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

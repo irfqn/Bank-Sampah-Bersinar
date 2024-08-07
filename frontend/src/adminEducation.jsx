@@ -40,7 +40,7 @@ const AdminEducation = () => {
                 article: formattedArticle
             };
 
-            const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/postEdu", {
+            const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/postEdu", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -202,7 +202,7 @@ const AdminTPrice = () => {
 
         try {
             // Pengiriman permintaan ke server
-            const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/price", {
+            const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/price", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -238,7 +238,7 @@ const AdminTPrice = () => {
             const params = new URLSearchParams({ month: rightMonth });
 
             // Pengambilan data trash dari API dengan parameter month
-            const response = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getPrice?${params.toString()}`, {
+            const response = await fetch(`https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/getPrice?${params.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

@@ -37,7 +37,7 @@ const FormPenyetoran = () => {
     const fetchTotalHarga = async () => {
       try {
         const token = getCookie("token");
-        const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/getTotalHarga", {
+        const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/getTotalHarga", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const FormPenyetoran = () => {
     const fetchProfile = async () => {
       try {
         const token = getCookie("token");
-        const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/profile", {
+        const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/profile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const FormPenyetoran = () => {
     const fetchPickupData = async () => {
       try {
         const token = getCookie("token");
-        const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/getPickUpById", {
+        const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/getPickUpById", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -145,7 +145,7 @@ const FormPenyetoran = () => {
     const fetchTotalPrice = async () => {
       try {
         const token = getCookie("token");
-        const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/getTotalHarga", {
+        const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/getTotalHarga", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const FormPenyetoran = () => {
     setSubmitError("");
     try {
       const token = getCookie("token");
-      const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/submitForm", {
+      const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/submitForm", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

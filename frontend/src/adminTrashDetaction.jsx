@@ -68,7 +68,7 @@ const TrashDetectionMain = () => {
       try {
         const currentDate = new Date();
         const currentMonth = currentDate.toISOString().slice(0, 7);
-        const response = await fetch(`https://bank-sampah-bersinar.azurewebsites.net/api/user/getPrice?month=${currentMonth}`);
+        const response = await fetch(`https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/getPrice?month=${currentMonth}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data prices");
         }

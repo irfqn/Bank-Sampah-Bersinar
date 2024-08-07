@@ -75,7 +75,7 @@ const UserProfile = () => {
       try {
         const token = getCookie("token"); // Mengambil token dari cookie
         console.log(token)
-        const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/profile", {
+        const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/profile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

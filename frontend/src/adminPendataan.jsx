@@ -24,7 +24,7 @@ const AdminPendataan=()=>{
     const handleMitra=async ()=>{
         try {
             console.log("Form Data:", formData)
-            const response = await fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/pendataan",{
+            const response = await fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/pendataan",{
                 method:"POST",
                 headers:{
                     "Content-Type": "application/json",

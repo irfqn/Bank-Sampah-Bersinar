@@ -148,7 +148,7 @@ const Login2 = () => {
       if (email === "admin@gmail.com" && password === "Admin123$%") {
         navigate("/admin");
       } else {
-        fetch("https://bank-sampah-bersinar.azurewebsites.net/api/user/login", {
+        fetch("https://bank-sampah-bersinar2-b3ffehbphqdqgshh.southeastasia-01.azurewebsites.net/api/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
