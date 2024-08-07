@@ -28,7 +28,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => console.log("Connected to MongoDB", process.MONGODB_URI))
   .catch((error) => console.error("Error connecting to MongoDB:", error));
 
 // Base path for all routes
