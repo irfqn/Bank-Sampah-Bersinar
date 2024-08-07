@@ -16,7 +16,10 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 // Configure CORS to allow requests from specific origin
 const corsOptions = {
   origin: 'https://bank-sampah-bersinar-11oj.vercel.app',
-  optionsSuccessStatus: 200
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: "Content-Type, Authorization"
 };
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
