@@ -12,12 +12,12 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-// app.use(cors());
+app.use(cors());
 // Configure CORS to allow requests from specific origin
-const corsOptions = {
-  origin: 'https://bank-sampah-bersinar-11oj.vercel.app',
-  optionsSuccessStatus: 200
-};
+// const corsOptions = {
+//   origin: 'https://bank-sampah-bersinar-11oj.vercel.app',
+//   optionsSuccessStatus: 200
+// };
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
